@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { FaFacebook } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
+import { Link } from "react-router-dom";
 import "./style.css";
 const Login = () => {
   return (
@@ -45,7 +46,9 @@ const Login = () => {
         </div>
 
         <div className="mt-2 text-center">
-          <Button variant="outline-primary">Create new account</Button>
+          <Link to="create">
+            <Button variant="outline-primary">Create New Account</Button>
+          </Link>
         </div>
       </div>
     </div>
