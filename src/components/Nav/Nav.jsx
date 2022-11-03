@@ -1,20 +1,40 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Nav = () => {
+  let activeClassName = "text-black";
+  let inActiveClassName = "text-black-50 text-decoration-none ";
   return (
     <div className="container">
       <nav className="d-flex gap-2">
         <div className="left col-8 fs-2 d-flex justify-content-evenly">
-          <Link className="text-decoration-none text-black-50" to="/home">
+          <NavLink
+            // className="text-decoration-none text-black-50"
+            to="/home"
+            className={({ isActive }) =>
+              isActive ? activeClassName : inActiveClassName
+            }
+          >
             Home
-          </Link>
-          <Link className="text-decoration-none text-black-50 " to="/profile">
+          </NavLink>
+          <NavLink
+            // className="text-decoration-none text-black-50 "
+            to="/profile"
+            className={({ isActive }) =>
+              isActive ? activeClassName : inActiveClassName
+            }
+          >
             Profile
-          </Link>
-          <Link className="text-decoration-none text-black-50" to="/chat">
+          </NavLink>
+          <NavLink
+            // className="text-decoration-none text-black-50"
+            to="/chat"
+            className={({ isActive }) =>
+              isActive ? activeClassName : inActiveClassName
+            }
+          >
             Chat
-          </Link>
+          </NavLink>
         </div>
 
         <div className="right col-4 d-flex align-items-center">

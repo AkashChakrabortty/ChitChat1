@@ -1,5 +1,6 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
+import AfterLoginRoute from "../components/AfterLoginRoute/AfterLoginRoute";
 import Chat from "../components/Chat/Chat";
 import CreateAccount from "../components/CreateAccount/CreateAccount";
 import Home from "../components/Home/Home";
@@ -20,6 +21,12 @@ const router = createBrowserRouter([
         path: "/create",
         element: <CreateAccount></CreateAccount>,
       },
+    ],
+  },
+  {
+    path: "/",
+    element: <AfterLoginRoute></AfterLoginRoute>,
+    children: [
       {
         path: "/home",
         element: <Home></Home>,
