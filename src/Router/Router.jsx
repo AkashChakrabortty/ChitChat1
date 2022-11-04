@@ -57,7 +57,7 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/chatinbox",
+        path: "/inbox",
         element: <ChatInbox></ChatInbox>,
       },
       {

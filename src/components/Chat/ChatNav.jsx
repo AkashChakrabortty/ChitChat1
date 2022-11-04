@@ -25,12 +25,12 @@ const ChatNav = () => {
 
           <div className="right col-10 d-flex justify-content-evenly">
             <NavLink
-              to="/chatinbox"
+              to="/inbox"
               className={({ isActive }) =>
                 isActive ? activeClassName : inActiveClassName
               }
             >
-              Chat
+              Inbox
             </NavLink>
             <NavLink
               to="/active"
