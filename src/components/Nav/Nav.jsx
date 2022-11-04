@@ -9,7 +9,6 @@ const Nav = () => {
       <nav className="d-flex gap-2">
         <div className="left col-8 fs-2 d-flex justify-content-evenly">
           <NavLink
-            // className="text-decoration-none text-black-50"
             to="/home"
             className={({ isActive }) =>
               isActive ? activeClassName : inActiveClassName
@@ -18,7 +17,6 @@ const Nav = () => {
             Home
           </NavLink>
           <NavLink
-            // className="text-decoration-none text-black-50 "
             to="/profile"
             className={({ isActive }) =>
               isActive ? activeClassName : inActiveClassName
@@ -27,8 +25,7 @@ const Nav = () => {
             Profile
           </NavLink>
           <NavLink
-            // className="text-decoration-none text-black-50"
-            to="/chat"
+            to="/chatHome"
             className={({ isActive }) =>
               isActive ? activeClassName : inActiveClassName
             }
