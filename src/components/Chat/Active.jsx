@@ -5,7 +5,7 @@ import React from "react";
 const Active = () => {
   return (
     <div className="col-6 mx-auto mt-4">
-      <div className="person d-flex align-items-center gap-2 justify-content-center">
+      <div className="person d-flex align-items-center gap-2 justify-content-center shadow-lg rounded p-3 bg-body">
         <div
           className="imgwithactive"
           style={{
