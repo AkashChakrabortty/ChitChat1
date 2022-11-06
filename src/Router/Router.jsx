@@ -11,7 +11,13 @@ import ErrorPage from "../components/ErrorPage/ErrorPage";
 import Home from "../components/Home/Home";
 import Login from "../components/Login/Login";
 import MainRoute from "../components/MainRoute/MainRoute";
+import Nav from "../components/Nav/Nav";
+import Edit from "../components/Profile/Edit";
+import Friend from "../components/Profile/Friend";
+import Post from "../components/Profile/Post";
 import Profile from "../components/Profile/Profile";
+import ProfileImg from "../components/Profile/ProfileImg";
+import ProfileNav from "../components/Profile/ProfileNav";
 
 const router = createBrowserRouter([
   {
@@ -39,7 +45,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile></Profile>,
+        element: (
+          <>
+            <ProfileImg></ProfileImg>
+            <Profile></Profile>
+          </>
+        ),
       },
       {
         path: "/chatHome",
@@ -67,6 +78,35 @@ const router = createBrowserRouter([
       {
         path: "/story",
         element: <Story></Story>,
+      },
+    ],
+  },
+  {
+    path: "/",
+    element: (
+      <>
+        <Nav></Nav>
+        <ProfileImg></ProfileImg>
+        <ProfileNav></ProfileNav>
+        <Outlet></Outlet>
+      </>
+    ),
+    children: [
+      {
+        path: "/post",
+        element: <Post></Post>,
+      },
+      {
+        path: "/story",
+        element: <Story></Story>,
+      },
+      {
+        path: "/friend",
+        element: <Friend></Friend>,
+      },
+      {
+        path: "/edit",
+        element: <Edit></Edit>,
       },
     ],
   },
