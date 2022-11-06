@@ -14,9 +14,10 @@ import MainRoute from "../components/MainRoute/MainRoute";
 import Nav from "../components/Nav/Nav";
 import Edit from "../components/Profile/Edit";
 import Friend from "../components/Profile/Friend";
+import Interaction from "../components/Profile/Interaction";
 import Post from "../components/Profile/Post";
-import Profile from "../components/Profile/Profile";
 import ProfileImg from "../components/Profile/ProfileImg";
+import ProfileInfo from "../components/Profile/ProfileInfo";
 import ProfileNav from "../components/Profile/ProfileNav";
 
 const router = createBrowserRouter([
@@ -48,7 +49,8 @@ const router = createBrowserRouter([
         element: (
           <>
             <ProfileImg></ProfileImg>
-            <Profile></Profile>
+            <ProfileNav></ProfileNav>
+            <ProfileInfo></ProfileInfo>
           </>
         ),
       },
@@ -94,11 +96,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/post",
+        index: true,
         element: <Post></Post>,
       },
       {
-        path: "/story",
-        element: <Story></Story>,
+        path: "/interaction",
+        element: <Interaction></Interaction>,
       },
       {
         path: "/friend",
