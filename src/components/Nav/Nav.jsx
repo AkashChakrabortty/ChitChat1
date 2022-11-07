@@ -7,7 +7,7 @@ const Nav = () => {
   return (
     <div className="container">
       <nav className="d-flex gap-2">
-        <div className="left col-8 fs-2 d-flex justify-content-evenly">
+        <div className="left col-8 fs-3 d-flex  justify-content-evenly">
           <NavLink
             to="/home"
             className={({ isActive }) =>
@@ -31,6 +31,22 @@ const Nav = () => {
             }
           >
             Chat
+          </NavLink>
+          <NavLink
+            to="/notification"
+            className={({ isActive }) =>
+              isActive ? activeClassName : inActiveClassName
+            }
+          >
+            Notification(2)
+          </NavLink>
+          <NavLink
+            to="/people"
+            className={({ isActive }) =>
+              isActive ? activeClassName : inActiveClassName
+            }
+          >
+            People(2)
           </NavLink>
         </div>
 

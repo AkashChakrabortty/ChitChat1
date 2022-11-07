@@ -8,10 +8,12 @@ import ChatNav from "../components/Chat/ChatNav";
 import Story from "../components/Chat/Story";
 import CreateAccount from "../components/CreateAccount/CreateAccount";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
-import Home from "../components/Home/Home";
 import Login from "../components/Login/Login";
 import MainRoute from "../components/MainRoute/MainRoute";
 import Nav from "../components/Nav/Nav";
+import Home from "../components/Page/Home/Home";
+import Notification from "../components/Page/Notification/Notification";
+import People from "../components/Page/People/People";
 import Edit from "../components/Profile/Edit";
 import Friend from "../components/Profile/Friend";
 import Interaction from "../components/Profile/Interaction";
@@ -57,6 +59,14 @@ const router = createBrowserRouter([
       {
         path: "/chatHome",
         element: <Chat></Chat>,
+      },
+      {
+        path: "/people",
+        element: <People></People>,
+      },
+      {
+        path: "/notification",
+        element: <Notification></Notification>,
       },
     ],
   },
