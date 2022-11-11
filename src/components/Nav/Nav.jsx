@@ -1,52 +1,170 @@
+import {
+  faBell,
+  faEnvelope,
+  faPeopleGroup,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { NavLink } from "react-router-dom";
+import img from "../Page/Chat/icon.jpg";
+import "./Nav.css";
 
 const Nav = () => {
   let activeClassName = "font-color";
   let inActiveClassName = "font-color text-decoration-none ";
+
+  let activeClassNameM = "text-warning nav-m";
+  let inActiveClassNameM = "text-warning";
   return (
     <div className="container">
       <nav className="">
-        <div className="left col-8 fs-3 d-flex  mx-auto justify-content-evenly">
-          <NavLink
-            to="/home"
-            className={({ isActive }) =>
-              isActive ? activeClassName : inActiveClassName
-            }
-          >
-            Home
+        <div className="left d-none d-sm-block fs-3">
+          <div className="d-flex justify-content-evenly">
+            <NavLink
+              to="/home"
+              className={({ isActive }) =>
+                isActive ? activeClassName : inActiveClassName
+              }
+            >
+              Home
+            </NavLink>
+
+            <NavLink
+              to="/profile"
+              className={({ isActive }) =>
+                isActive ? activeClassName : inActiveClassName
+              }
+            >
+              Profile
+            </NavLink>
+
+            <NavLink
+              to="/chatHome"
+              className={({ isActive }) =>
+                isActive ? activeClassName : inActiveClassName
+              }
+            >
+              Chat
+            </NavLink>
+
+            <NavLink
+              to="/notification"
+              className={({ isActive }) =>
+                isActive ? activeClassName : inActiveClassName
+              }
+            >
+              Notification(2)
+            </NavLink>
+            <NavLink
+              to="/people"
+              className={({ isActive }) =>
+                isActive ? activeClassName : inActiveClassName
+              }
+            >
+              People(2)
+            </NavLink>
+          </div>
+          {/* <div>
+            <NavLink
+              to="/home"
+              className={({ isActive }) =>
+                isActive ? activeClassName : inActiveClassName
+              }
+            >
+              Home
+            </NavLink>
+          </div> */}
+
+          {/* <div>
+            <NavLink
+              to="/profile"
+              className={({ isActive }) =>
+                isActive ? activeClassName : inActiveClassName
+              }
+            >
+              Profile
+            </NavLink>
+          </div> */}
+
+          {/* <div>
+            <NavLink
+              to="/chatHome"
+              className={({ isActive }) =>
+                isActive ? activeClassName : inActiveClassName
+              }
+            >
+              Chat
+            </NavLink>
+          </div> */}
+          {/* 
+          <div>
+            <NavLink
+              to="/notification"
+              className={({ isActive }) =>
+                isActive ? activeClassName : inActiveClassName
+              }
+            >
+              Notification(2)
+            </NavLink>
+          </div> */}
+          {/* 
+          <div>
+            <NavLink
+              to="/people"
+              className={({ isActive }) =>
+                isActive ? activeClassName : inActiveClassName
+              }
+            >
+              People(2)
+            </NavLink>
+          </div> */}
+        </div>
+
+        <div className="icon-nav d-sm-none d-flex justify-content-evenly fs-1">
+          <NavLink to="/home">
+            <img
+              src={img}
+              alt="ChitChat"
+              style={{
+                height: "40px",
+                border: "1px solid",
+                borderRadius: "50%",
+              }}
+            />
           </NavLink>
           <NavLink
             to="/profile"
             className={({ isActive }) =>
-              isActive ? activeClassName : inActiveClassName
+              isActive ? activeClassNameM : inActiveClassNameM
             }
           >
-            Profile
+            <FontAwesomeIcon icon={faUser} />
           </NavLink>
           <NavLink
             to="/chatHome"
             className={({ isActive }) =>
-              isActive ? activeClassName : inActiveClassName
+              isActive ? activeClassNameM : inActiveClassNameM
             }
           >
-            Chat
+            <FontAwesomeIcon icon={faEnvelope} />
           </NavLink>
+
           <NavLink
             to="/notification"
             className={({ isActive }) =>
-              isActive ? activeClassName : inActiveClassName
+              isActive ? activeClassNameM : inActiveClassNameM
             }
           >
-            Notification(2)
+            <FontAwesomeIcon icon={faBell} />
           </NavLink>
           <NavLink
             to="/people"
             className={({ isActive }) =>
-              isActive ? activeClassName : inActiveClassName
+              isActive ? activeClassNameM : inActiveClassNameM
             }
           >
-            People(2)
+            <FontAwesomeIcon icon={faPeopleGroup} />
           </NavLink>
         </div>
 
