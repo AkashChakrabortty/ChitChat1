@@ -5,9 +5,23 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: linear-gradient(to right,rgba(33, 112, 116, 1)
+  ,rgba(55, 116, 91, 1)
+  );
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Reuse cls */
+.input-bg{
+  background-image: linear-gradient(to right,rgba(33, 112, 116, 0.7)
+  ,rgba(55, 116, 91, 0.9)
+  );
+}
+.font-color{
+  color: #ffc107;
+  /* color: red; */
 }

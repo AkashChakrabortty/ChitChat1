@@ -8,8 +8,8 @@ import React from "react";
 
 const Home = () => {
   return (
-    <div className="container">
-      <div className="shadow-lg rounded p-3 bg-body border col-8 mx-auto">
+    <div className="container font-color">
+      <div className="shadow-lg input-bg rounded p-3 bg-body border col-8 mx-auto">
         <FontAwesomeIcon icon={faPlus} className="fs-1" />
         <span className="fs-4 p-2">Photo</span>
         {/* <!-- Button trigger modal --> */}
@@ -61,7 +61,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="shadow-lg mt-2 rounded p-3 bg-body border col-8 mx-auto">
+      <div className="shadow-lg input-bg mt-2 rounded p-3 bg-body border col-8 mx-auto">
         <img
           src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
           alt="Akash Chakrabortty"
@@ -89,33 +89,33 @@ const Home = () => {
       </div>
 
       <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
+        <div class="pagination justify-content-center my-3">
           <li class="page-item">
-            <a class="page-link" href="f">
+            <a class="page-link input-bg font-color" href="f">
               Previous
             </a>
           </li>
           <li class="page-item">
-            <a class="page-link" href="f">
+            <a class="page-link font-color" href="f">
               1
             </a>
           </li>
           <li class="page-item">
-            <a class="page-link" href="f">
+            <a class="page-link font-color" href="f">
               2
             </a>
           </li>
           <li class="page-item">
-            <a class="page-link" href="f">
+            <a class="page-link font-color" href="f">
               3
             </a>
           </li>
           <li class="page-item">
-            <a class="page-link" href="f">
+            <a class="page-link input-bg font-color" href="f">
               Next
             </a>
           </li>
-        </ul>
+        </div>
       </nav>
     </div>
   );

@@ -2,12 +2,12 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const Nav = () => {
-  let activeClassName = "text-black";
-  let inActiveClassName = "text-black-50 text-decoration-none ";
+  let activeClassName = "font-color";
+  let inActiveClassName = "font-color text-decoration-none ";
   return (
     <div className="container">
-      <nav className="d-flex gap-2">
-        <div className="left col-8 fs-3 d-flex  justify-content-evenly">
+      <nav className="">
+        <div className="left col-8 fs-3 d-flex  mx-auto justify-content-evenly">
           <NavLink
             to="/home"
             className={({ isActive }) =>
@@ -50,15 +50,15 @@ const Nav = () => {
           </NavLink>
         </div>
 
-        <div className="right col-4 d-flex align-items-center">
+        <div className="right col-sm-4 col-6 my-2 mx-auto align-items-center">
           <form className="d-flex" role="search">
             <input
-              className="form-control me-2"
+              className="form-control me-2 input-bg"
               type="search"
               placeholder="Search"
               aria-label="Search"
             />
-            <button className="btn btn-outline-success" type="submit">
+            <button className="btn btn-outline-warning" type="submit">
               Search
             </button>
           </form>

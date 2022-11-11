@@ -1,5 +1,8 @@
 #login-container{
   height: 100vh;
+  background-image: linear-gradient(to right,rgba(33, 112, 116, 1)
+  ,rgba(55, 116, 91, 1)
+  );
 }
 #login-section{
   transform: translate(-50%,-50%);
