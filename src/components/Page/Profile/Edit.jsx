@@ -3,15 +3,15 @@ import React from "react";
 const Edit = () => {
   return (
     <div className="container">
-      <div className="study col-8 mx-auto">
-        <div class="input-group mb-3">
-          <label htmlFor="" className="fs-3">
+      <div className="study mx-auto col-sm-10">
+        <div className="input-group mb-3 font-color input-bg bg-body rounded">
+          <label htmlFor="" className="fs-3 p-2">
             Study:
           </label>
-          <div class="input-group-text">
+          <div className="input-group-text font-color input-bg bg-body ">
             <label htmlFor="">Hide:</label>
             <input
-              class="form-check-input mt-0"
+              className="form-check-input mt-0"
               type="checkbox"
               value=""
               aria-label="Checkbox for following text input"
@@ -19,7 +19,7 @@ const Edit = () => {
           </div>
           <input
             type="text"
-            class="form-control"
+            className="form-control input-bg bg-body"
             aria-label="Text input with checkbox"
           />
         </div>

@@ -1,6 +1,7 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import "./profile.css";
 
 const ProfileImg = () => {
   return (
@@ -34,14 +35,16 @@ const ProfileImg = () => {
         ></div>
       </div>
 
-      <div className="user-info mt-5 text-center">
-        <h2>
-          Akash Chakrabortty{" "}
-          <span className="text-primary fs-6">
-            <FontAwesomeIcon icon={faCheck} />
-            Owner
-          </span>
-        </h2>
+      <div className="user-info mt-5 text-center font-color">
+        <div className="fs-6 d-flex justify-content-center">
+          <div className="name">
+            <h2 className="">Akash Chakrabortty </h2>
+          </div>
+          <div className="owner-div text-primary d-flex align-items-center ms-2 p-2 input-bg bg-body rounded">
+            <FontAwesomeIcon icon={faCheck} className="" />
+            <span>Owner</span>
+          </div>
+        </div>
         <p>Learner || Programmer</p>
       </div>
     </div>

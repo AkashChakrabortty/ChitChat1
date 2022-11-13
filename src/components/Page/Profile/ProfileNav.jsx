@@ -2,8 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const ProfileNav = () => {
-  let activeClassName = "text-black";
-  let inActiveClassName = "text-black-50 text-decoration-none ";
+  let activeClassName = "font-color";
+  let inActiveClassName = "font-color text-decoration-none ";
   return (
     <div>
       <div className="profile-route col-12 fs-2 d-flex justify-content-evenly">

@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 const Post = () => {
   return (
-    <div className="container">
-      <div className="shadow-lg rounded p-3 bg-body border col-6 mx-auto">
+    <div className="container mt-2">
+      <div className="shadow-lg rounded p-3 bg-body border col-sm-10 mx-auto input-bg font-color">
         <img
           src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
           alt="Akash Chakrabortty"

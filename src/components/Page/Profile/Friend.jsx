@@ -2,7 +2,7 @@ import React from "react";
 
 const Friend = () => {
   return (
-    <div className="col-6 mx-auto mt-2 d-flex gap-2 justify-content-center shadow-lg rounded p-3 bg-body">
+    <div className="col-6 mx-auto mt-2 d-flex gap-2 justify-content-center shadow-lg rounded p-3 input-bg bg-body">
       <img
         src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
         alt="Akash Chakrabortty"
@@ -11,7 +11,7 @@ const Friend = () => {
           width: "50px",
         }}
       />
-      <div className="content">
+      <div className="content font-color">
         <div className="name">
           <span>Akash Chakrabortty</span>
         </div>

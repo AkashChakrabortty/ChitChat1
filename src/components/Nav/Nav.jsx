@@ -65,60 +65,6 @@ const Nav = () => {
               People(2)
             </NavLink>
           </div>
-          {/* <div>
-            <NavLink
-              to="/home"
-              className={({ isActive }) =>
-                isActive ? activeClassName : inActiveClassName
-              }
-            >
-              Home
-            </NavLink>
-          </div> */}
-
-          {/* <div>
-            <NavLink
-              to="/profile"
-              className={({ isActive }) =>
-                isActive ? activeClassName : inActiveClassName
-              }
-            >
-              Profile
-            </NavLink>
-          </div> */}
-
-          {/* <div>
-            <NavLink
-              to="/chatHome"
-              className={({ isActive }) =>
-                isActive ? activeClassName : inActiveClassName
-              }
-            >
-              Chat
-            </NavLink>
-          </div> */}
-          {/* 
-          <div>
-            <NavLink
-              to="/notification"
-              className={({ isActive }) =>
-                isActive ? activeClassName : inActiveClassName
-              }
-            >
-              Notification(2)
-            </NavLink>
-          </div> */}
-          {/* 
-          <div>
-            <NavLink
-              to="/people"
-              className={({ isActive }) =>
-                isActive ? activeClassName : inActiveClassName
-              }
-            >
-              People(2)
-            </NavLink>
-          </div> */}
         </div>
 
         <div className="icon-nav d-sm-none d-flex justify-content-evenly fs-1">
@@ -168,7 +114,7 @@ const Nav = () => {
           </NavLink>
         </div>
 
-        <div className="right col-sm-4 col-6 my-2 mx-auto align-items-center">
+        <div className="right col-md-4 col-6 my-2 mx-auto align-items-center">
           <form className="d-flex" role="search">
             <input
               className="form-control me-2 input-bg"
