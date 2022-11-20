@@ -25,3 +25,10 @@ code {
   color: #ffc107;
   /* color: red; */
 }
+
+.default-bg{
+  height: 100vh;
+  background-image: linear-gradient(to right,rgba(33, 112, 116, 1)
+  ,rgba(55, 116, 91, 1)
+  );
+}

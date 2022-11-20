@@ -1,20 +1,40 @@
 import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
+import { Navigate } from "react-router-dom";
 import { UserInfo } from "../../UserContext/AuthProvider";
 import "./style.css";
 const CreateAccount = () => {
-  const { createUser } = useContext(UserInfo);
+  const { createUser, userId } = useContext(UserInfo);
   const [password, setPassword] = useState(undefined);
 
   const handleForm = (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
+    const name = event.target.name.value;
     createUser(email, password);
+    const user = {
+      name: name,
+      email: email,
+      password: password,
+    };
+    fetch("http://localhost:5000/create", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   };
+
+  if (userId) {
+    return <Navigate to="/home" replace={true} />;
+  }
   return (
-    <div>
+    <div className="default-bg  font-color">
       <div id="create-container" className="col-12 position-absolute">
         <div
           id="create-section"
@@ -29,6 +49,7 @@ const CreateAccount = () => {
                 name="name"
                 placeholder="Enter Your name"
                 required
+                className="input-bg font-color"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupEmail">
@@ -38,6 +59,7 @@ const CreateAccount = () => {
                 name="email"
                 placeholder="Enter email"
                 required
+                className="input-bg font-color"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupPassword">
@@ -47,11 +69,12 @@ const CreateAccount = () => {
                 name="password"
                 placeholder="Password"
                 required
+                className="input-bg font-color"
                 onChange={(event) => {
                   setPassword(event.target.value);
                 }}
               />
-              <p className="text-muted">
+              <p className="font-color">
                 {password !== undefined
                   ? `${
                       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
@@ -69,29 +92,17 @@ const CreateAccount = () => {
                 {/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
                   password
                 ) ? (
-                  <Button variant="outline-primary" type="submit">
+                  <Button variant="outline-warning" type="submit">
                     Submit
                   </Button>
                 ) : (
-                  <Button variant="outline-primary" type="submit" disabled>
+                  <Button variant="outline-warning" type="submit" disabled>
                     Submit
                   </Button>
                 )}
               </div>
             </div>
           </Form>
-
-          {/* <div>
-            <h4 className="text-center">Create by</h4>
-            <div className="login-icon d-flex justify-content-evenly">
-              <div className="fb">
-                <FaFacebook className="fs-3" />
-              </div>
-              <div className="gmail">
-                <SiGmail className="fs-3" />
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
     </div>

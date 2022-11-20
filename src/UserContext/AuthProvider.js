@@ -7,7 +7,14 @@ const AuthProvider = ({children}) => {
     const auth = getAuth(app);
     const [userId, setUserId] = useState();
     const createUser = (email,password) => {
-        return   createUserWithEmailAndPassword(auth, email, password);
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            setUserId(user.uid)
+          })
+          .catch(() => {
+           alert('create new account failed!')
+          });
     }
     const resetEmail = (email) => {
         return  sendPasswordResetEmail(auth, email)
@@ -21,7 +28,7 @@ const AuthProvider = ({children}) => {
           setUserId(user.uid)
         })
         .catch(() => {
-         alert('something wrong!')
+         alert('login failed!')
         });
     }
 

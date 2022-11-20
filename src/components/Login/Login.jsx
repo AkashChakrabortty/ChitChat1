@@ -27,7 +27,10 @@ const Login = () => {
     }
   };
   return (
-    <div id="login-container" className="col-12 position-absolute font-color">
+    <div
+      id="login-container"
+      className="col-12 position-absolute font-color default-bg"
+    >
       <div
         id="login-section"
         className="col-6 col-md-4 position-relative top-50 start-50 border p-2 rounded"
