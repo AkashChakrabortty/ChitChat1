@@ -1,21 +1,63 @@
-import {
-  faComment,
-  faPlus,
-  faThumbsUp,
-} from "@fortawesome/free-solid-svg-icons";
+import { faComment, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useContext } from "react";
+import { UserInfo } from "../../../UserContext/AuthProvider";
 
 const Home = () => {
+  const { userId } = useContext(UserInfo);
+  console.log(userId);
+  let photoUrl;
+  const handleForm = (event) => {
+    event.preventDefault();
+    const text = event.target.text.value;
+    const img = event.target.photo.files[0];
+    const imgbb_key = process.env.REACT_APP_imgbb_key;
+
+    const formData = new FormData();
+    formData.append("image", img);
+
+    const url = `https://api.imgbb.com/1/upload?key=${imgbb_key}`;
+
+    //upload photo imgbb
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        photoUrl = data.data.display_url;
+      })
+      .then(() => {
+        const post = {
+          uid: userId,
+          text: text,
+          photo: photoUrl,
+        };
+        console.log(post);
+
+        //insert db
+        fetch("http://localhost:5000/post", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(post),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            event.target.reset();
+          });
+      });
+  };
+
   return (
     <div className="container font-color">
-      <div className="shadow-lg input-bg rounded p-3 bg-body border col-8 mx-auto">
-        <FontAwesomeIcon icon={faPlus} className="fs-1" />
-        <span className="fs-4 p-2">Photo</span>
+      <div className="shadow-lg input-bg rounded p-3 bg-body border col-8 mx-auto text-center">
         {/* <!-- Button trigger modal --> */}
         <button
           type="button"
-          className="btn"
+          className="btn col-md-8"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
         >
@@ -45,17 +87,27 @@ const Home = () => {
                 ></button>
               </div>
               <div className="modal-body">
-                <textarea
-                  className="form-control"
-                  placeholder="What's on Your mind?"
-                  id="floatingTextarea"
-                  style={{ height: "35vh" }}
-                ></textarea>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-primary">
-                  Submit
-                </button>
+                <form onSubmit={handleForm}>
+                  <textarea
+                    className="form-control"
+                    placeholder="What's on Your mind?"
+                    id="floatingTextarea"
+                    style={{ height: "35vh" }}
+                    name="text"
+                  ></textarea>
+
+                  <input
+                    type="file"
+                    className="form-control my-2"
+                    id="inputGroupFile02"
+                    accept=".jpg"
+                    name="photo"
+                  />
+
+                  <button type="submit" className="btn btn-primary">
+                    Submit
+                  </button>
+                </form>
               </div>
             </div>
           </div>
