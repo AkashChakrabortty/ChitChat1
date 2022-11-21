@@ -5,7 +5,7 @@ import { UserInfo } from "../../../UserContext/AuthProvider";
 
 const Home = () => {
   const { userId } = useContext(UserInfo);
-  console.log(userId);
+
   let photoUrl;
   const handleForm = (event) => {
     event.preventDefault();

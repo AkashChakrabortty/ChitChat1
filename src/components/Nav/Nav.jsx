@@ -1,5 +1,4 @@
 import {
-  faBell,
   faEnvelope,
   faPeopleGroup,
   faUser,
@@ -9,6 +8,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import img from "../Page/Chat/icon.jpg";
 import "./Nav.css";
+import Popover from "./Popover.jsx";
 
 const Nav = () => {
   let activeClassName = "font-color";
@@ -16,6 +16,7 @@ const Nav = () => {
 
   let activeClassNameM = "text-warning nav-m";
   let inActiveClassNameM = "text-warning";
+
   return (
     <div className="container">
       <nav className="">
@@ -49,14 +50,6 @@ const Nav = () => {
             </NavLink>
 
             <NavLink
-              to="/notification"
-              className={({ isActive }) =>
-                isActive ? activeClassName : inActiveClassName
-              }
-            >
-              Notification(2)
-            </NavLink>
-            <NavLink
               to="/people"
               className={({ isActive }) =>
                 isActive ? activeClassName : inActiveClassName
@@ -64,6 +57,8 @@ const Nav = () => {
             >
               People(2)
             </NavLink>
+
+            <Popover></Popover>
           </div>
         </div>
 
@@ -96,14 +91,15 @@ const Nav = () => {
             <FontAwesomeIcon icon={faEnvelope} />
           </NavLink>
 
-          <NavLink
+          {/* <NavLink
             to="/notification"
             className={({ isActive }) =>
               isActive ? activeClassNameM : inActiveClassNameM
             }
           >
             <FontAwesomeIcon icon={faBell} />
-          </NavLink>
+          </NavLink> */}
+
           <NavLink
             to="/people"
             className={({ isActive }) =>
@@ -112,6 +108,8 @@ const Nav = () => {
           >
             <FontAwesomeIcon icon={faPeopleGroup} />
           </NavLink>
+
+          <Popover></Popover>
         </div>
 
         <div className="right col-md-4 col-6 my-2 mx-auto align-items-center">

@@ -21,6 +21,7 @@ import Post from "../components/Page/Profile/Post";
 import ProfileImg from "../components/Page/Profile/ProfileImg";
 import ProfileInfo from "../components/Page/Profile/ProfileInfo";
 import ProfileNav from "../components/Page/Profile/ProfileNav";
+import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -44,7 +45,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/home",
-        element: <Home></Home>,
+        element: (
+          <PrivateRoute>
+            <Home></Home>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/profile",
