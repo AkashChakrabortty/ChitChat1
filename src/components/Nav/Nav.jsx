@@ -20,78 +20,79 @@ const Nav = () => {
   return (
     <div className="container">
       <nav className="">
-        <div className="left d-none d-sm-block fs-3">
-          <div className="d-flex justify-content-evenly">
-            <NavLink
-              to="/home"
-              className={({ isActive }) =>
-                isActive ? activeClassName : inActiveClassName
-              }
-            >
-              Home
-            </NavLink>
+        <div className="d-flex justify-content-between">
+          <div className="left d-none d-sm-block fs-3 col-11">
+            <div className="d-flex justify-content-evenly">
+              <NavLink
+                to="/home"
+                className={({ isActive }) =>
+                  isActive ? activeClassName : inActiveClassName
+                }
+              >
+                Home
+              </NavLink>
 
+              <NavLink
+                to="/profile"
+                className={({ isActive }) =>
+                  isActive ? activeClassName : inActiveClassName
+                }
+              >
+                Profile
+              </NavLink>
+
+              <NavLink
+                to="/chatHome"
+                className={({ isActive }) =>
+                  isActive ? activeClassName : inActiveClassName
+                }
+              >
+                Chat
+              </NavLink>
+
+              <NavLink
+                to="/people"
+                className={({ isActive }) =>
+                  isActive ? activeClassName : inActiveClassName
+                }
+              >
+                People(2)
+              </NavLink>
+
+              {/* <Popover></Popover> */}
+            </div>
+          </div>
+
+          <div className="icon-nav d-sm-none d-flex justify-content-evenly fs-1 col-11">
+            <NavLink to="/home">
+              <img
+                src={img}
+                alt="ChitChat"
+                style={{
+                  height: "40px",
+                  border: "1px solid",
+                  borderRadius: "50%",
+                }}
+              />
+            </NavLink>
             <NavLink
               to="/profile"
               className={({ isActive }) =>
-                isActive ? activeClassName : inActiveClassName
+                isActive ? activeClassNameM : inActiveClassNameM
               }
             >
-              Profile
+              <FontAwesomeIcon icon={faUser} />
             </NavLink>
-
             <NavLink
               to="/chatHome"
               className={({ isActive }) =>
-                isActive ? activeClassName : inActiveClassName
+                isActive ? activeClassNameM : inActiveClassNameM
               }
             >
-              Chat
+              <FontAwesomeIcon icon={faEnvelope} />
             </NavLink>
 
-            <NavLink
-              to="/people"
-              className={({ isActive }) =>
-                isActive ? activeClassName : inActiveClassName
-              }
-            >
-              People(2)
-            </NavLink>
-
-            <Popover></Popover>
-          </div>
-        </div>
-
-        <div className="icon-nav d-sm-none d-flex justify-content-evenly fs-1">
-          <NavLink to="/home">
-            <img
-              src={img}
-              alt="ChitChat"
-              style={{
-                height: "40px",
-                border: "1px solid",
-                borderRadius: "50%",
-              }}
-            />
-          </NavLink>
-          <NavLink
-            to="/profile"
-            className={({ isActive }) =>
-              isActive ? activeClassNameM : inActiveClassNameM
-            }
-          >
-            <FontAwesomeIcon icon={faUser} />
-          </NavLink>
-          <NavLink
-            to="/chatHome"
-            className={({ isActive }) =>
-              isActive ? activeClassNameM : inActiveClassNameM
-            }
-          >
-            <FontAwesomeIcon icon={faEnvelope} />
-          </NavLink>
-
-          {/* <NavLink
+            {/* <NavLink
             to="/notification"
             className={({ isActive }) =>
               isActive ? activeClassNameM : inActiveClassNameM
@@ -100,14 +101,17 @@ const Nav = () => {
             <FontAwesomeIcon icon={faBell} />
           </NavLink> */}
 
-          <NavLink
-            to="/people"
-            className={({ isActive }) =>
-              isActive ? activeClassNameM : inActiveClassNameM
-            }
-          >
-            <FontAwesomeIcon icon={faPeopleGroup} />
-          </NavLink>
+            <NavLink
+              to="/people"
+              className={({ isActive }) =>
+                isActive ? activeClassNameM : inActiveClassNameM
+              }
+            >
+              <FontAwesomeIcon icon={faPeopleGroup} />
+            </NavLink>
+
+            {/* <Popover></Popover> */}
+          </div>
 
           <Popover></Popover>
         </div>
