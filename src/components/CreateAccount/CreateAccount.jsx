@@ -1,38 +1,79 @@
 import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserInfo } from "../../UserContext/AuthProvider";
 import "./style.css";
 const CreateAccount = () => {
-  const { createUser, userId } = useContext(UserInfo);
+  const { createUser, updateUser, setUserId } = useContext(UserInfo);
   const [password, setPassword] = useState(undefined);
+  let photoUrl;
+  const navigate = useNavigate();
 
   const handleForm = (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
     const name = event.target.name.value;
-    createUser(email, password);
-    const user = {
-      name: name,
-      email: email,
-      password: password,
-    };
-    fetch("http://localhost:5000/create", {
+    const img = event.target.photo.files[0];
+    const imgbb_key = process.env.REACT_APP_imgbb_key;
+
+    const formData = new FormData();
+    formData.append("image", img);
+
+    const url = `https://api.imgbb.com/1/upload?key=${imgbb_key}`;
+
+    fetch(url, {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(user),
+      body: formData,
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        photoUrl = data.data.display_url;
+      })
+      .then(() => {
+        createUser(email, password).then((userCredential) => {
+          updateUser(name, photoUrl);
+
+          setUserId(userCredential.uid);
+          const user = {
+            name: name,
+            email: email,
+            password: password,
+            photoUrl: photoUrl,
+          };
+          fetch("http://localhost:5000/create", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(user),
+          })
+            .then((res) => res.json())
+            .then((data) => navigate("/home"));
+        });
+      });
+
+    // createUser(email, password);
+    // const user = {
+    //   name: name,
+    //   email: email,
+    //   password: password,
+    // };
+    // fetch("http://localhost:5000/create", {
+    //   method: "POST",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(user),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => console.log(data));
   };
 
-  if (userId) {
-    return <Navigate to="/home" replace={true} />;
-  }
+  // if (userId) {
+  //   return <Navigate to="/home" replace={true} />;
+  // }
   return (
     <div className="default-bg  font-color">
       <div id="create-container" className="col-12 position-absolute">
@@ -50,6 +91,17 @@ const CreateAccount = () => {
                 placeholder="Enter Your name"
                 required
                 className="input-bg font-color"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Photo</Form.Label>
+              <Form.Control
+                type="file"
+                name="photo"
+                placeholder="Enter Your Photo"
+                required
+                className="input-bg font-color"
+                accept=".jpg"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupEmail">

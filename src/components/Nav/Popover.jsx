@@ -1,12 +1,13 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import { NavLink } from "react-router-dom";
 import { UserInfo } from "../../UserContext/AuthProvider";
 
 const Popovernav = () => {
-  const { email, logout } = useContext(UserInfo);
-  const [name, setName] = useState();
+  const { logout, user } = useContext(UserInfo);
+  // console.log(user);
+  // const [name, setName] = useState();
   let activeClassName = "font-color fs-6";
   let inActiveClassName = "font-color text-decoration-none fs-6";
 
@@ -14,11 +15,11 @@ const Popovernav = () => {
     logout();
   };
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/user/${email}`)
-      .then((res) => res.json())
-      .then((data) => setName(data.name));
-  }, []);
+  // useEffect(() => {
+  //   fetch(`http://localhost:5000/user/${email}`)
+  //     .then((res) => res.json())
+  //     .then((data) => setName(data.name));
+  // }, []);
   return (
     <div>
       {["bottom"].map((placement) => (
@@ -32,7 +33,7 @@ const Popovernav = () => {
               className="font-color input-bg"
             >
               <Popover.Header as="h3" className="font-color input-bg">
-                {name}
+                {user?.displayName}
               </Popover.Header>
               <Popover.Body>
                 <NavLink
@@ -53,8 +54,8 @@ const Popovernav = () => {
         >
           <div>
             <img
-              src="https://i.ibb.co/KGvM6vC/1jpg.jpg"
-              alt="name"
+              src={user?.photoURL}
+              alt={user?.displayName}
               style={{
                 height: "40px",
                 width: "40px",
