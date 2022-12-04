@@ -8,6 +8,7 @@ const AuthProvider = ({children}) => {
     const [userId, setUserId] = useState();
     const [email, setEmail] = useState();
     const [user,setUser] =  useState();
+    const [reFetch,setReFetch ]= useState(false)
     const createUser = (email,password) => {
        return createUserWithEmailAndPassword(auth, email, password)
         // .then((userCredential) => {
@@ -61,7 +62,7 @@ const AuthProvider = ({children}) => {
           }
         });
       }, []);
-    const authInfo = {  user ,createUser , LogIn , userId , resetEmail , logout , email, updateUser , setUserId};
+    const authInfo = {  user ,createUser , LogIn , userId , resetEmail , logout , email, updateUser , setUserId , reFetch, setReFetch};
     return (
        <UserInfo.Provider value={authInfo}>
         {children}

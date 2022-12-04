@@ -34,6 +34,10 @@ const router = createBrowserRouter([
         element: <Login></Login>,
       },
       {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
         path: "/create",
         element: <CreateAccount></CreateAccount>,
       },
@@ -55,23 +59,37 @@ const router = createBrowserRouter([
         path: "/profile",
         element: (
           <>
-            <ProfileImg></ProfileImg>
-            <ProfileNav></ProfileNav>
-            <ProfileInfo></ProfileInfo>
+            <PrivateRoute>
+              <ProfileImg></ProfileImg>
+              <ProfileNav></ProfileNav>
+              <ProfileInfo></ProfileInfo>
+            </PrivateRoute>
           </>
         ),
       },
       {
         path: "/chatHome",
-        element: <Chat></Chat>,
+        element: (
+          <PrivateRoute>
+            <Chat></Chat>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/people",
-        element: <People></People>,
+        element: (
+          <PrivateRoute>
+            <People></People>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/notification",
-        element: <Notification></Notification>,
+        element: (
+          <PrivateRoute>
+            <Notification></Notification>
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -79,22 +97,37 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <>
-        <ChatNav></ChatNav>
-        <Outlet></Outlet>
+        <PrivateRoute>
+          {" "}
+          <ChatNav></ChatNav>
+          <Outlet></Outlet>
+        </PrivateRoute>
       </>
     ),
     children: [
       {
         path: "/inbox",
-        element: <ChatInbox></ChatInbox>,
+        element: (
+          <PrivateRoute>
+            <ChatInbox></ChatInbox>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/active",
-        element: <Active></Active>,
+        element: (
+          <PrivateRoute>
+            <Active></Active>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/story",
-        element: <Story></Story>,
+        element: (
+          <PrivateRoute>
+            <Story></Story>
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -102,29 +135,47 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <>
-        <Nav></Nav>
-        <ProfileImg></ProfileImg>
-        <ProfileNav></ProfileNav>
-        <Outlet></Outlet>
+        <PrivateRoute>
+          <Nav></Nav>
+          <ProfileImg></ProfileImg>
+          <ProfileNav></ProfileNav>
+          <Outlet></Outlet>
+        </PrivateRoute>
       </>
     ),
     children: [
       {
         path: "/post",
         index: true,
-        element: <Post></Post>,
+        element: (
+          <PrivateRoute>
+            <Post></Post>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/interaction",
-        element: <Interaction></Interaction>,
+        element: (
+          <PrivateRoute>
+            <Interaction></Interaction>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/friend",
-        element: <Friend></Friend>,
+        element: (
+          <PrivateRoute>
+            <Friend></Friend>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/edit",
-        element: <Edit></Edit>,
+        element: (
+          <PrivateRoute>
+            <Edit></Edit>
+          </PrivateRoute>
+        ),
       },
     ],
   },

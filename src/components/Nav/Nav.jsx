@@ -4,18 +4,27 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { UserInfo } from "../../UserContext/AuthProvider";
 import img from "../Page/Chat/icon.jpg";
 import "./Nav.css";
 import Popover from "./Popover.jsx";
 
 const Nav = () => {
+  const { user, reFetch } = useContext(UserInfo);
+  const [req, setReq] = useState(0);
   let activeClassName = "font-color";
   let inActiveClassName = "font-color text-decoration-none ";
 
   let activeClassNameM = "text-warning nav-m";
   let inActiveClassNameM = "text-warning";
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/request/${user.email}`)
+      .then((res) => res.json())
+      .then((data) => setReq(data.length));
+  }, [user, reFetch]);
 
   return (
     <div className="container">
@@ -56,10 +65,8 @@ const Nav = () => {
                   isActive ? activeClassName : inActiveClassName
                 }
               >
-                People(2)
+                People{req > 0 ? `(${req})` : undefined}
               </NavLink>
-
-              {/* <Popover></Popover> */}
             </div>
           </div>
 
