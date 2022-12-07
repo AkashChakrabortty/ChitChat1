@@ -1,11 +1,13 @@
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { UserInfo } from "../../../UserContext/AuthProvider";
 
 const FriendRequest = () => {
   const [data, setData] = useState([]);
   const { user , reFetch, setReFetch } = useContext(UserInfo);
+  const notify = (value) => toast(value);
 
   useEffect(() => {
     fetch(`http://localhost:5000/request/${user.email}`)
@@ -13,12 +15,31 @@ const FriendRequest = () => {
       .then((data) => setData(data));
   }, [user,reFetch]);
    
-  const reqAccepted = () => {
-    console.log('acc')
+  const reqAccepted = (req) => {
+    const reqAcceptedInfo = {
+      user_name: req.receiver_name,
+      user_email: req.receiver_email,
+      user_photo: req.receiver_photo,
+      friend_name: req.sender_name,
+      friend_email: req.sender_email,
+      friend_photo:req.sender_photo
+    }
+    fetch(`http://localhost:5000/reqAccepted/${req._id}`,{
+        method: 'POST',
+        headers: {
+            'content-type': "application/json"
+        },
+        body: JSON.stringify(reqAcceptedInfo)
+    })
+    .then(res => res.json())
+    .then(data => {
+        setReFetch(!reFetch);
+        notify('Request accepted')
+    })
+
   }
   const reqDeleted = (req) => {
    
-
     fetch(`http://localhost:5000/reqDelete/${req._id}`,{
         method: 'DELETE',
         headers: {
@@ -28,7 +49,10 @@ const FriendRequest = () => {
     .then(res => res.json())
     .then(data => {
         setReFetch(!reFetch);
+        notify('Request Deleted')
     })
+
+
   }
  
 
@@ -56,7 +80,7 @@ const FriendRequest = () => {
               <div className="text-center">
                 <h5>{req.sender_name}</h5>
                <div className="d-flex justify-content-evenly">
-               <button className="btn btn-outline-primary" onClick={reqAccepted}>
+               <button className="btn btn-outline-primary" onClick={ () => reqAccepted(req)}>
                   <FontAwesomeIcon
                     icon={faCheck}
                   />
