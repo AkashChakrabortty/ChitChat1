@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { UserInfo } from "../../../UserContext/AuthProvider";
 
 const ProfileNav = () => {
   let activeClassName = "font-color";
   let inActiveClassName = "font-color text-decoration-none ";
+  const { user } = useContext(UserInfo);
+  const [friends, setFriends] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:5000/friend/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => setFriends(data.length));
+  }, [user]);
   return (
     <div>
       <div className="profile-route col-12 fs-2 d-flex justify-content-evenly">
@@ -29,7 +37,7 @@ const ProfileNav = () => {
             isActive ? activeClassName : inActiveClassName
           }
         >
-          Friend
+          Friend{friends > 0 ? `(${friends})` : undefined}
         </NavLink>
         <NavLink
           to="/edit"
