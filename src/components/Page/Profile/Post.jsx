@@ -6,18 +6,47 @@ import { UserInfo } from "../../../UserContext/AuthProvider";
 const Post = () => {
   const { user } = useContext(UserInfo);
   const [posts, setPosts] = useState([]);
+  const [like, setLike] = useState(false);
+  const [refetch, setRefetch] = useState(false);
   useEffect(() => {
     fetch(`http://localhost:5000/post/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setPosts(data);
-
-        // console.log(data[0]);
-        // console.log(data[0].milliseconds);
-        // const ds = new Date(data[0].milliseconds);
-        // console.log(ds.toUTCString());
       });
-  }, [user]);
+  }, [user, refetch]);
+  // let like = false;
+  // console.log(like);
+  const handleLike = (post) => {
+    // event.preventDefault();
+
+    // like = !like;
+    setLike(!like);
+
+    const milliseconds = new Date().getTime();
+    const likeInfo = {
+      // post: post.post,
+      // post_photo: post.post_photo,
+      // user_email: post.user_email,
+      // user_name: post.user_name,
+      // user_photo: post.user_photo,
+      milliseconds: milliseconds,
+      // previousId: post._id,
+    };
+    const islike = { like: like };
+
+    fetch(`http://localhost:5000/like/${post._id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(islike),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setRefetch(!refetch);
+      });
+  };
 
   return (
     <div className="container mt-2">
@@ -45,11 +74,18 @@ const Post = () => {
               </div>
               <div className="d-flex justify-content-evenly">
                 <div className="like">
-                  <FontAwesomeIcon icon={faThumbsUp} className="fs-2" /> (100)
+                  <button className="btn btn-outline-warning">
+                    <FontAwesomeIcon
+                      icon={faThumbsUp}
+                      className={`fs-2 ${
+                        post.ownerLike ? "text-primary" : undefined
+                      }`}
+                      onClick={() => handleLike(post)}
+                    />
+                  </button>
                 </div>
                 <div className="comments">
                   <FontAwesomeIcon icon={faComment} className="fs-2" />
-                  (100)
                 </div>
               </div>
             </div>
