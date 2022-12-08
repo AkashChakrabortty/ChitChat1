@@ -38,7 +38,7 @@ const People = () => {
           : notify("Request already sent!");
       });
   };
-  console.log(peoples);
+
   return (
     <div className="col-6 mx-auto mt-4">
       <FriendRequest></FriendRequest>

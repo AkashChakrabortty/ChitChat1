@@ -61,7 +61,7 @@ const AuthProvider = ({children}) => {
             setUser()
           }
         });
-      }, []);
+      }, [reFetch]);
     const authInfo = {  user ,createUser , LogIn , userId , resetEmail , logout , email, updateUser , setUserId , reFetch, setReFetch};
     return (
        <UserInfo.Provider value={authInfo}>

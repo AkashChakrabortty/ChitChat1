@@ -1,49 +1,34 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useContext } from "react";
+import { UserInfo } from "../../../UserContext/AuthProvider";
 import "./profile.css";
 
 const ProfileImg = () => {
+  const { user, email } = useContext(UserInfo);
   return (
     <div>
-      <div
-        className="container cover-photo d-flex justify-content-center"
-        style={{
-          height: "30vh",
-          width: "100%",
-          backgroundImage:
-            "url(https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png)",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "60% 100%",
-          backgroundPosition: "center",
-          position: "relative",
-        }}
-      >
-        <div
-          className="profile-photo"
-          style={{
-            height: "100px",
-            width: "100px",
-            borderRadius: "50%",
-            backgroundImage:
-              "url(https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png)",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-            position: "absolute",
-            top: "70%",
-          }}
-        ></div>
+      <div className="col-6 mx-auto d-flex justify-content-center">
+        <img
+          src={user.photoURL}
+          alt={user.displayName}
+          className="img-fluid"
+          style={{ borderRadius: "50%", height: "30vh", width: "50%" }}
+        />
       </div>
 
-      <div className="user-info mt-5 text-center font-color">
+      <div className="user-info mt-2 text-center font-color">
         <div className="fs-6 d-flex justify-content-center">
           <div className="name">
-            <h2 className="">Akash Chakrabortty </h2>
+            <h2 className=""> {user.displayName}</h2>
           </div>
-          <div className="owner-div text-primary d-flex align-items-center ms-2 p-2 input-bg bg-body rounded">
-            <FontAwesomeIcon icon={faCheck} className="" />
-            <span>Owner</span>
-          </div>
+
+          {email === "akashchakrabortty2000@gmail.com" ? (
+            <div className="owner-div text-primary d-flex align-items-center ms-2 p-2 input-bg bg-body rounded">
+              <FontAwesomeIcon icon={faCheck} className="" />
+              <span>Owner</span>
+            </div>
+          ) : undefined}
         </div>
         <p>Learner || Programmer</p>
       </div>
