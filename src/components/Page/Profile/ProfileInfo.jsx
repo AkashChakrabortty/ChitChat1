@@ -9,7 +9,7 @@ const ProfileInfo = () => {
       .then((res) => res.json())
       .then((data) => setData(data));
   }, [user]);
-  console.log(data);
+
   return (
     <>
       {data ? (

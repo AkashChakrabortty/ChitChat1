@@ -9,8 +9,16 @@ const Post = () => {
   useEffect(() => {
     fetch(`http://localhost:5000/post/${user?.email}`)
       .then((res) => res.json())
-      .then((data) => setPosts(data));
+      .then((data) => {
+        setPosts(data);
+
+        // console.log(data[0]);
+        // console.log(data[0].milliseconds);
+        // const ds = new Date(data[0].milliseconds);
+        // console.log(ds.toUTCString());
+      });
   }, [user]);
+
   return (
     <div className="container mt-2">
       {posts?.map((post) => {
@@ -26,7 +34,7 @@ const Post = () => {
                   borderRadius: "50%",
                 }}
               />
-              <p>2.44AM(22NOV,2020)</p>
+              <p>{new Date(post.milliseconds).toUTCString()}</p>
               <p className="fs-4">{post.post}</p>
               <div>
                 <img

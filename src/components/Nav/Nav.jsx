@@ -21,7 +21,7 @@ const Nav = () => {
   let inActiveClassNameM = "text-warning";
 
   useEffect(() => {
-    fetch(`http://localhost:5000/request/${user.email}`)
+    fetch(`http://localhost:5000/request/${user?.email}`)
       .then((res) => res.json())
       .then((data) => setReq(data.length));
   }, [user, reFetch]);
