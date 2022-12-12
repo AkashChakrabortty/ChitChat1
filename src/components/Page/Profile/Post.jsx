@@ -15,23 +15,13 @@ const Post = () => {
         setPosts(data);
       });
   }, [user, refetch]);
-  // let like = false;
-  // console.log(like);
-  const handleLike = (post) => {
-    // event.preventDefault();
 
-    // like = !like;
+  const handleLike = (post) => {
     setLike(!like);
 
     const milliseconds = new Date().getTime();
     const likeInfo = {
-      // post: post.post,
-      // post_photo: post.post_photo,
-      // user_email: post.user_email,
-      // user_name: post.user_name,
-      // user_photo: post.user_photo,
       milliseconds: milliseconds,
-      // previousId: post._id,
     };
     const islike = { like: like };
 
@@ -72,7 +62,7 @@ const Post = () => {
                   className="img-fluid"
                 />
               </div>
-              <div className="d-flex justify-content-evenly">
+              <div className="d-flex justify-content-evenly mt-2">
                 <div className="like">
                   <button className="btn btn-outline-warning">
                     <FontAwesomeIcon

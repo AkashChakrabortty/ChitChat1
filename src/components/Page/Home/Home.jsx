@@ -1,6 +1,7 @@
 import { faComment, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { UserInfo } from "../../../UserContext/AuthProvider";
 import Post from "../../Post/Post";
 
@@ -11,7 +12,8 @@ const Home = () => {
   let [startIndex, setStartIndex] = useState(0);
   const [loader, setLoader] = useState(true);
   const [reFetch, setReFetch] = useState(false);
-
+  const [like, setLike] = useState(false);
+  const notify = (value) => toast(value);
   useEffect(() => {
     fetch(
       `http://localhost:5000/friendsPost/${user?.email}?startIndex=${startIndex}`
@@ -21,6 +23,7 @@ const Home = () => {
         setPosts(data.filterLimitArray);
         setTotal(data.total);
         setLoader(false);
+        console.log(data);
       });
   }, [user, reFetch]);
   const loadFirst = () => {
@@ -45,6 +48,47 @@ const Home = () => {
   };
   // console.log(startIndex);
   // console.log(posts);
+  const handleLike = (post) => {
+    // setLike(!like);
+
+    const milliseconds = new Date().getTime();
+    const likeInfo = {
+      post_owner: post.user_name,
+      post_owner_email: post.user_email,
+      post_owner_Photo: post.user_photo,
+      post: post.post,
+      post_photo: post.post_photo,
+      like_giver_name: user.displayName,
+      like_giver_email: user.email,
+      like_giver_photo: user.photoURL,
+      previous_id: post._id,
+      milliseconds: milliseconds,
+    };
+    // const islike = { like: like };
+    // console.log(likeInfo);
+    // setReFetch(!reFetch);
+    fetch(`http://localhost:5000/friendPostLike/`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(likeInfo),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged === false) {
+          // notify("Like allready Done!");
+          // setLike(false);
+          setReFetch(!reFetch);
+        } else {
+          // notify("Like Done!");
+          // setLike(true);
+          setReFetch(!reFetch);
+        }
+        // console.log(data);
+      });
+  };
+  // console.log(like);
   return (
     <div className="container font-color">
       <Post></Post>
@@ -80,14 +124,20 @@ const Home = () => {
                           className="img-fluid"
                         />
                       </div>
-                      <div className="d-flex justify-content-evenly">
+                      <div className="d-flex justify-content-evenly mt-2">
                         <div className="like">
-                          <FontAwesomeIcon icon={faThumbsUp} className="fs-2" />{" "}
-                          (100)
+                          <button className="btn btn-outline-warning">
+                            <FontAwesomeIcon
+                              icon={faThumbsUp}
+                              className={`fs-2 ${
+                                post?.ownerLike ? "text-primary" : undefined
+                              }`}
+                              onClick={() => handleLike(post)}
+                            />{" "}
+                          </button>
                         </div>
                         <div className="comments">
                           <FontAwesomeIcon icon={faComment} className="fs-2" />
-                          (100)
                         </div>
                       </div>
                     </div>
