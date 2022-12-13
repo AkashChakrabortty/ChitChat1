@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserInfo } from "../../../UserContext/AuthProvider";
 import Post from "../../Post/Post";
 import CommentModal from "./CommentModal";
+import LikeModal from "./LikeModal";
 
 const Home = () => {
   const { user } = useContext(UserInfo);
@@ -14,7 +15,7 @@ const Home = () => {
   const [reFetch, setReFetch] = useState(false);
   const [ modal , setModal] = useState({});
   const [comments, setComments] = useState([]);
-
+  const [totalLikes,setTotalLikes] = useState([]);
   
   useEffect(() => {
     fetch(
@@ -48,10 +49,8 @@ const Home = () => {
     setStartIndex(total - 2);
     setReFetch(!reFetch);
   };
-  // console.log(startIndex);
-  // console.log(posts);
+
   const handleLike = (post) => {
-    // setLike(!like);
 
     const milliseconds = new Date().getTime();
     const likeInfo = {
@@ -66,9 +65,7 @@ const Home = () => {
       previous_id: post._id,
       milliseconds: milliseconds,
     };
-    // const islike = { like: like };
-    // console.log(likeInfo);
-    // setReFetch(!reFetch);
+  
     fetch(`http://localhost:5000/friendPostLike/`, {
       method: "POST",
       headers: {
@@ -98,6 +95,12 @@ const Home = () => {
           .then((res) => res.json())
           .then((data) => setComments(data));
   }
+
+  const handleLikeModal = (likeInfo) => {
+    setTotalLikes(likeInfo);
+  };
+
+
   return (
     <div className="container font-color">
       <Post></Post>
@@ -134,7 +137,15 @@ const Home = () => {
                         />
                       </div>
                       <div className="d-flex justify-content-evenly mt-2">
-                        <div className="like">
+                        <div className="like d-flex gap-2">
+                          <button
+                            className="btn btn-outline-warning"
+                            data-bs-toggle="modal"
+                            data-bs-target="#likeModal"
+                            onClick={() => handleLikeModal(post.totalLikes)}
+                          >
+                            {post.totalLikes.length}
+                          </button>
                           <button className="btn btn-outline-warning">
                             <FontAwesomeIcon
                               icon={faThumbsUp}
@@ -142,7 +153,7 @@ const Home = () => {
                                 post?.ownerLike ? "text-primary" : undefined
                               }`}
                               onClick={() => handleLike(post)}
-                            />{" "}
+                            />
                           </button>
                         </div>
                         <div className="comments">
@@ -217,6 +228,7 @@ const Home = () => {
         </div>
       )}
       <CommentModal post={modal} comments={comments}></CommentModal>
+      <LikeModal likeInfo={totalLikes}></LikeModal>
     </div>
   );
 };
