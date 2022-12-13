@@ -4,10 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { UserInfo } from "../../../UserContext/AuthProvider";
 import CommentModal from "../Home/CommentModal";
+import LikeModal from "../Home/LikeModal";
 const Post = () => {
   const { user } = useContext(UserInfo);
   const [posts, setPosts] = useState([]);
-  // const [like, setLike] = useState(false);
+  const [totalLikes, setTotalLikes] = useState([]);
   // const [refetch, setRefetch] = useState(false);
    const [reFetch, setReFetch] = useState(false);
   const [modal, setModal] = useState({});
@@ -17,7 +18,8 @@ const Post = () => {
       .then((res) => res.json())
       .then((data) => {
         setPosts(data);
-        console.log(data)
+      
+        // console.log(data)
       });
   }, [user, reFetch]);
 
@@ -81,6 +83,10 @@ const handleModal = (post) => {
     .then((res) => res.json())
     .then((data) => setComments(data));
 };
+const handleLikeModal = (likeInfo) => {
+  
+   setTotalLikes(likeInfo);
+};
   return (
     <div className="container mt-2">
       {posts?.map((post) => {
@@ -106,7 +112,15 @@ const handleModal = (post) => {
                 />
               </div>
               <div className="d-flex justify-content-evenly mt-2">
-                <div className="like">
+                <div className="like d-flex gap-2">
+                  <button
+                    className="btn btn-outline-warning"
+                    data-bs-toggle="modal"
+                    data-bs-target="#likeModal"
+                    onClick={() => handleLikeModal(post.totalLikes)}
+                  >
+                    {post?.totalLikes?.length}
+                  </button>
                   <button className="btn btn-outline-warning">
                     <FontAwesomeIcon
                       icon={faThumbsUp}
@@ -133,6 +147,7 @@ const handleModal = (post) => {
         );
       })}
       <CommentModal post={modal} comments={comments}></CommentModal>
+      <LikeModal likeInfo={totalLikes}></LikeModal>
     </div>
   );
 };

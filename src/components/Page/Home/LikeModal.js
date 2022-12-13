@@ -1,7 +1,7 @@
 import React from 'react';
 
 const LikeModal = ({ likeInfo }) => {
-  console.log(likeInfo);
+ 
   return (
     <div>
       <div
@@ -24,7 +24,7 @@ const LikeModal = ({ likeInfo }) => {
               </div>
               <div className="allcomments my-2">
               {
-              likeInfo.map(info => {
+              likeInfo?.map(info => {
                 return (
                   <>
                     <div className="d-flex gap-2 my-2">
@@ -37,7 +37,7 @@ const LikeModal = ({ likeInfo }) => {
                           borderRadius: "50%",
                         }}
                       />
-                      <span>{info.like_giver_name}</span>
+                      <span className='font-color'>{info.like_giver_name}</span>
                     </div>
                   </>
                 );
