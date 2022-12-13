@@ -12,6 +12,7 @@ const ProfileNav = () => {
       .then((res) => res.json())
       .then((data) => setFriends(data.length));
   }, [user, reFetch]);
+  
   return (
     <div>
       <div className="profile-route col-12 fs-2 d-flex justify-content-evenly">
