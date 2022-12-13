@@ -3,41 +3,84 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import React, { useContext, useEffect, useState } from "react";
 import { UserInfo } from "../../../UserContext/AuthProvider";
+import CommentModal from "../Home/CommentModal";
 const Post = () => {
   const { user } = useContext(UserInfo);
   const [posts, setPosts] = useState([]);
-  const [like, setLike] = useState(false);
-  const [refetch, setRefetch] = useState(false);
+  // const [like, setLike] = useState(false);
+  // const [refetch, setRefetch] = useState(false);
+   const [reFetch, setReFetch] = useState(false);
+  const [modal, setModal] = useState({});
+  const [comments, setComments] = useState([]);
   useEffect(() => {
     fetch(`http://localhost:5000/post/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setPosts(data);
+        console.log(data)
       });
-  }, [user, refetch]);
+  }, [user, reFetch]);
 
   const handleLike = (post) => {
-    setLike(!like);
+    // setLike(!like);
 
     const milliseconds = new Date().getTime();
-    const likeInfo = {
-      milliseconds: milliseconds,
-    };
-    const islike = { like: like };
+    // const likeInfo = {
+    //   milliseconds: milliseconds,
+    // };
+    // const islike = { like: like };
+     const likeInfo = {
+       post_owner: post.user_name,
+       post_owner_email: post.user_email,
+       post_owner_Photo: post.user_photo,
+       post: post.post,
+       post_photo: post.post_photo,
+       like_giver_name: user.displayName,
+       like_giver_email: user.email,
+       like_giver_photo: user.photoURL,
+       previous_id: post._id,
+       milliseconds: milliseconds,
+     };
+       fetch(`http://localhost:5000/friendPostLike/`, {
+         method: "POST",
+         headers: {
+           "content-type": "application/json",
+         },
+         body: JSON.stringify(likeInfo),
+       })
+         .then((res) => res.json())
+         .then((data) => {
+           if (data.acknowledged === false) {
+             // notify("Like allready Done!");
+             // setLike(false);
+             setReFetch(!reFetch);
+           } else {
+             // notify("Like Done!");
+             // setLike(true);
+             setReFetch(!reFetch);
+           }
+           // console.log(data);
+         });
 
-    fetch(`http://localhost:5000/like/${post._id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(islike),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setRefetch(!refetch);
-      });
+    // fetch(`http://localhost:5000/like/${post._id}`, {
+    //   method: "PATCH",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(islike),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setRefetch(!refetch);
+    //   });
   };
 
+const handleModal = (post) => {
+  setModal(post);
+  fetch(`http://localhost:5000/comment/${post?._id}`)
+    .then((res) => res.json())
+    .then((data) => setComments(data));
+};
   return (
     <div className="container mt-2">
       {posts?.map((post) => {
@@ -68,20 +111,28 @@ const Post = () => {
                     <FontAwesomeIcon
                       icon={faThumbsUp}
                       className={`fs-2 ${
-                        post.ownerLike ? "text-primary" : undefined
+                        post?.ownerLike ? "text-primary" : undefined
                       }`}
                       onClick={() => handleLike(post)}
-                    />
+                    />{" "}
                   </button>
                 </div>
                 <div className="comments">
-                  <FontAwesomeIcon icon={faComment} className="fs-2" />
+                  <button
+                    className="btn btn-outline-warning"
+                    data-bs-toggle="modal"
+                    data-bs-target="#commentModal"
+                    onClick={() => handleModal(post)}
+                  >
+                    <FontAwesomeIcon icon={faComment} className="fs-2" />
+                  </button>
                 </div>
               </div>
             </div>
           </>
         );
       })}
+      <CommentModal post={modal} comments={comments}></CommentModal>
     </div>
   );
 };

@@ -1,9 +1,9 @@
 import { faComment, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { UserInfo } from "../../../UserContext/AuthProvider";
 import Post from "../../Post/Post";
+import CommentModal from "./CommentModal";
 
 const Home = () => {
   const { user } = useContext(UserInfo);
@@ -12,8 +12,10 @@ const Home = () => {
   let [startIndex, setStartIndex] = useState(0);
   const [loader, setLoader] = useState(true);
   const [reFetch, setReFetch] = useState(false);
-  const [like, setLike] = useState(false);
-  const notify = (value) => toast(value);
+  const [ modal , setModal] = useState({});
+  const [comments, setComments] = useState([]);
+
+  
   useEffect(() => {
     fetch(
       `http://localhost:5000/friendsPost/${user?.email}?startIndex=${startIndex}`
@@ -88,7 +90,14 @@ const Home = () => {
         // console.log(data);
       });
   };
-  // console.log(like);
+  
+ 
+  const handleModal = (post) => {
+     setModal(post);
+        fetch(`http://localhost:5000/comment/${post?._id}`)
+          .then((res) => res.json())
+          .then((data) => setComments(data));
+  }
   return (
     <div className="container font-color">
       <Post></Post>
@@ -137,7 +146,17 @@ const Home = () => {
                           </button>
                         </div>
                         <div className="comments">
-                          <FontAwesomeIcon icon={faComment} className="fs-2" />
+                          <button
+                            className="btn btn-outline-warning"
+                            data-bs-toggle="modal"
+                            data-bs-target="#commentModal"
+                            onClick={() => handleModal(post)}
+                          >
+                            <FontAwesomeIcon
+                              icon={faComment}
+                              className="fs-2"
+                            />
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -197,6 +216,7 @@ const Home = () => {
           No posts Found!!!
         </div>
       )}
+      <CommentModal post={modal} comments={comments}></CommentModal>
     </div>
   );
 };
