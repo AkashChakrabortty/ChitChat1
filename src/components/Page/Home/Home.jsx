@@ -2,53 +2,61 @@ import { faComment, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { UserInfo } from "../../../UserContext/AuthProvider";
+import Pagenation from "../../Pagenation/Pagenation";
 import Post from "../../Post/Post";
 import CommentModal from "./CommentModal";
 import LikeModal from "./LikeModal";
 
 const Home = () => {
-  const { user } = useContext(UserInfo);
+  const {
+    user,
+    reFetch,
+    loader,
+    setLoader,
+    setReFetch,
+    startIndexHomePost,
+  } = useContext(UserInfo);
   const [posts, setPosts] = useState();
-  const [total, setTotal] = useState();
-  let [startIndex, setStartIndex] = useState(0);
-  const [loader, setLoader] = useState(true);
-  const [reFetch, setReFetch] = useState(false);
+  const [totalPosts, setTotalPosts] = useState();
+  // let [startIndex, setStartIndex] = useState(0);
+  // const [loader, setLoader] = useState(true);
+  // const [reFetch, setReFetch] = useState(false);
   const [ modal , setModal] = useState({});
   const [comments, setComments] = useState([]);
   const [totalLikes,setTotalLikes] = useState([]);
-  
+ 
   useEffect(() => {
     fetch(
-      `http://localhost:5000/friendsPost/${user?.email}?startIndex=${startIndex}`
+      `http://localhost:5000/friendsPost/${user?.email}?startIndex=${startIndexHomePost}`
     )
       .then((res) => res.json())
       .then((data) => {
         setPosts(data.filterLimitArray);
-        setTotal(data.total);
+        setTotalPosts(data.total);
         setLoader(false);
-        console.log(data);
+        // console.log(data);
       });
   }, [user, reFetch]);
-  const loadFirst = () => {
-    setLoader(true);
-    setStartIndex(0);
-    setReFetch(!reFetch);
-  };
-  const loadPrevious = () => {
-    setLoader(true);
-    setStartIndex(startIndex - 2);
-    setReFetch(!reFetch);
-  };
-  const loadNext = () => {
-    setLoader(true);
-    setStartIndex(startIndex + 2);
-    setReFetch(!reFetch);
-  };
-  const loadLast = () => {
-    setLoader(true);
-    setStartIndex(total - 2);
-    setReFetch(!reFetch);
-  };
+  // const loadFirst = () => {
+  //   setLoader(true);
+  //   setStartIndex(0);
+  //   setReFetch(!reFetch);
+  // };
+  // const loadPrevious = () => {
+  //   setLoader(true);
+  //   setStartIndex(startIndex - 2);
+  //   setReFetch(!reFetch);
+  // };
+  // const loadNext = () => {
+  //   setLoader(true);
+  //   setStartIndex(startIndex + 2);
+  //   setReFetch(!reFetch);
+  // };
+  // const loadLast = () => {
+  //   setLoader(true);
+  //   setStartIndex(total - 2);
+  //   setReFetch(!reFetch);
+  // };
 
   const handleLike = (post) => {
 
@@ -174,8 +182,11 @@ const Home = () => {
                   </>
                 );
               })}
-
-              <nav aria-label="Page navigation example border">
+              <Pagenation
+                total={totalPosts}
+                whichPagenation="home"
+              ></Pagenation>
+              {/* <nav aria-label="Page navigation example border">
                 <div className="pagination justify-content-center my-3 ">
                   <li className="page-item mx-2">
                     {startIndex === 0 ? undefined : (
@@ -218,7 +229,7 @@ const Home = () => {
                     )}
                   </li>
                 </div>
-              </nav>
+              </nav> */}
             </>
           )}
         </>
