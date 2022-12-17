@@ -12,6 +12,7 @@ import ChatInbox from "../components/Page/Chat/ChatInbox";
 import ChatNav from "../components/Page/Chat/ChatNav";
 import Story from "../components/Page/Chat/Story";
 import Home from "../components/Page/Home/Home";
+import Inbox from "../components/Page/Inbox/Inbox";
 import Notification from "../components/Page/Notification/Notification";
 import People from "../components/Page/People/People";
 import Edit from "../components/Page/Profile/Edit";
@@ -45,7 +46,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <AfterLoginRoute></AfterLoginRoute>,
+    element: (
+      <PrivateRoute>
+        <AfterLoginRoute></AfterLoginRoute>
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/home",
@@ -178,6 +183,10 @@ const router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "/inbox/friend:email",
+    element: <Inbox></Inbox>,
   },
 ]);
 

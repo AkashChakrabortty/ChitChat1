@@ -3,12 +3,12 @@ import { Link, NavLink } from "react-router-dom";
 import img from "./icon.jpg";
 
 const ChatNav = () => {
-  let activeClassName = "text-black";
-  let inActiveClassName = "text-black-50 text-decoration-none ";
+   let activeClassName = "font-color";
+   let inActiveClassName = "font-color text-decoration-none ";
   return (
     <div className="mt-2 container">
       <nav>
-        <div className="col-12 fs-4 d-flex">
+        <div className="col-12 fs-4 d-flex ">
           <div className="left col-2 text-center">
             <Link to="/home">
               <img

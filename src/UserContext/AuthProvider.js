@@ -8,7 +8,9 @@ import {
   updateProfile
 } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
+import io from "socket.io-client";
 import app from "../firebase/firebase.config";
+const socket = io.connect("http://localhost:5000/");
 export const UserInfo = createContext();
 
 const AuthProvider = ({ children }) => {
@@ -45,6 +47,11 @@ const AuthProvider = ({ children }) => {
         // Signed in
         const user = userCredential.user;
         setUserId(user.uid);
+
+        // socket.on('active',()=> {
+        //   console.log('active client')
+        // })
+
       })
       .catch(() => {
         alert("login failed!");
@@ -106,6 +113,7 @@ const AuthProvider = ({ children }) => {
     setStartIndexFriendReq,
     startIndexFriend,
     setStartIndexFriend,
+    socket,
   };
   return <UserInfo.Provider value={authInfo}>{children}</UserInfo.Provider>;
 };

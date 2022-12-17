@@ -4,7 +4,11 @@ import { UserInfo } from "../../UserContext/AuthProvider";
 
 const PrivateRoute = ({ children }) => {
   const { user } = useContext(UserInfo);
-  return <div>{user ? children : <Navigate to="/"></Navigate>}</div>;
+  return <div>
+    {
+      user ? children : <Navigate to="/"></Navigate>
+    }
+  </div>;
 };
 
 export default PrivateRoute;

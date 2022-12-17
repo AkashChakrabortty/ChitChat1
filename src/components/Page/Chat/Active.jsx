@@ -1,8 +1,30 @@
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-
+import React, { useContext, useState } from "react";
+import io from "socket.io-client";
+import { UserInfo } from "../../../UserContext/AuthProvider";
+const socket = io.connect("http://localhost:5000/");
 const Active = () => {
+  // const {socket} = useState(UserInfo)
+  // console.log(socket)
+  const { user } = useContext(UserInfo);
+  const [activeFriends, setactiveFriends] = useState([]);
+  // const handlesubmit = () => {
+  //   socket.emit('reactEvent',test)
+  // }
+ 
+  // socket.on("message", (message) => {
+  //   console.log(message);
+  // });
+
+//  useEffect(() => {
+//    socket.emit("activeFriends", user.email);
+//    socket.on("message", (message) => {
+//      setactiveFriends(message);
+     
+//    });
+//  }, [user, socket, activeFriends]);
+  
   return (
     <div className="col-6 mx-auto mt-4">
       <div className="person d-flex align-items-center gap-2 justify-content-center shadow-lg rounded p-3 bg-body">
@@ -29,6 +51,7 @@ const Active = () => {
           />
         </div>
         <span>Akash Chakrabortty</span>
+     
       </div>
     </div>
   );
