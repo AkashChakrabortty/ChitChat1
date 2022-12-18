@@ -18,7 +18,7 @@ const ChatInbox = () => {
         friends.map((friend)=>{
           return (
             <>
-              <Link to={`friend:${friend.friend_email}`} className='text-decoration-none'>
+              <Link to={`friend:${friend._id}`} className='text-decoration-none'>
                 <div className="col-6 mx-auto mt-2 d-flex gap-2 justify-content-center shadow-lg rounded p-3 bg-body input-bg bg-body">
                   <img
                     src={friend.friend_photo}

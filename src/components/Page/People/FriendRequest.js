@@ -19,7 +19,7 @@ const FriendRequest = () => {
     const reqAcceptedInfo = {
       user_name: user.displayName,
       user_email: user.email,
-      user_photo: user.photURL,
+      user_photo: user.photoURL,
       friend_name: req.sender_name,
       friend_email: req.sender_email,
       friend_photo:req.sender_photo

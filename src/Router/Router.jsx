@@ -185,7 +185,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/inbox/friend:email",
+    path: "/inbox/friend:id",
     element: <Inbox></Inbox>,
   },
 ]);
