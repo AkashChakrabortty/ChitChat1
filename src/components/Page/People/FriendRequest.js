@@ -64,7 +64,7 @@ const FriendRequest = () => {
       {data.map((req) => {
         return (
           <>
-            <div className="person d-flex align-items-center gap-2 justify-content-center shadow-lg rounded p-3 bg-body my-2">
+            <div className="person d-flex align-items-center gap-2 justify-content-center shadow-lg rounded p-3 bg-body my-2 input-bg bg-body font-color">
               <div
                 className="imgwithactive"
                 style={{
@@ -79,18 +79,20 @@ const FriendRequest = () => {
               ></div>
               <div className="text-center">
                 <h5>{req.sender_name}</h5>
-               <div className="d-flex justify-content-evenly">
-               <button className="btn btn-outline-primary" onClick={ () => reqAccepted(req)}>
-                  <FontAwesomeIcon
-                    icon={faCheck}
-                  />
-                </button>
-                <button className="btn btn-outline-primary" onClick={()=>reqDeleted(req)}>
-                  <FontAwesomeIcon
-                    icon={faXmark}
-                  />
-                </button> 
-               </div>
+                <div className="d-flex justify-content-evenly">
+                  <button
+                    className="btn btn-outline-warning"
+                    onClick={() => reqAccepted(req)}
+                  >
+                    <FontAwesomeIcon icon={faCheck} />
+                  </button>
+                  <button
+                    className="btn btn-outline-warning"
+                    onClick={() => reqDeleted(req)}
+                  >
+                    <FontAwesomeIcon icon={faXmark} />
+                  </button>
+                </div>
               </div>
             </div>
           </>

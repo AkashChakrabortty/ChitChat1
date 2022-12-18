@@ -49,7 +49,7 @@ const People = () => {
         return (
           <>
             {people.email === user.email ? undefined : (
-              <div className="person d-flex align-items-center gap-2 justify-content-center shadow-lg rounded p-3 bg-body my-2">
+              <div className="person d-flex align-items-center gap-2 justify-content-center shadow-lg rounded p-3 bg-body my-2 input-bg bg-body font-color">
                 <div
                   className="imgwithactive"
                   style={{
@@ -65,7 +65,7 @@ const People = () => {
                 <div className="text-center">
                   <h5>{people.name}</h5>
                   <button
-                    className="btn btn-primary"
+                    className="btn btn-outline-warning"
                     onClick={() => addFriend(people)}
                   >
                     Add Friend
