@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import Button from "react-bootstrap/Button";
+import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
 import { Link, Navigate } from "react-router-dom";
 import { UserInfo } from "../../UserContext/AuthProvider";
@@ -7,9 +7,11 @@ import "./style.css";
 const Login = () => {
   const { LogIn, userId, resetEmail } = useContext(UserInfo);
   const [email, setEmail] = useState();
+  const [loader, setLoader] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setLoader(true)
     const email = event.target.email.value;
     const password = event.target.password.value;
     LogIn(email, password);
@@ -35,7 +37,15 @@ const Login = () => {
         id="login-section"
         className="col-6 col-md-4 position-relative top-50 start-50 border p-2 rounded"
       >
-        <h2 className="text-center">Login</h2>
+        {loader ? (
+          <div className="d-flex justify-content-center align-items-center">
+            <div className="spinner-border text-info" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        ) : (
+          <>
+           <h2 className="text-center">Login</h2>
         <Form onSubmit={handleSubmit} className="form">
           <Form.Group className="mb-3" controlId="formGroupEmail">
             <Form.Label>Email address</Form.Label>
@@ -76,6 +86,8 @@ const Login = () => {
             <Button variant="outline-warning">Create New Account</Button>
           </Link>
         </div>
+          </>
+        )}
       </div>
     </div>
   );

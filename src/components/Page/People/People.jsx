@@ -6,11 +6,15 @@ import FriendRequest from "./FriendRequest";
 const People = () => {
   const [peoples, setPeoples] = useState([]);
   const { user } = useContext(UserInfo);
+  const [loader, setLoader] = useState(true);
   const notify = (value) => toast(value);
   useEffect(() => {
-    fetch("http://localhost:5000/peoples")
+    fetch("https://chitchat-zeta.vercel.app/peoples")
       .then((res) => res.json())
-      .then((data) => setPeoples(data));
+    .then((data) => {
+      setPeoples(data)
+      setLoader(false)
+    });
   }, []);
   const addFriend = (people) => {
     const milliseconds = new Date().getTime();
@@ -24,7 +28,7 @@ const People = () => {
       milliseconds: milliseconds,
     };
 
-    fetch("http://localhost:5000/addFriend", {
+    fetch("https://chitchat-zeta.vercel.app/addFriend", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -45,37 +49,47 @@ const People = () => {
       <hr />
       <h2 className="text-center font-color">ChitChat Users</h2>
       <hr />
-      {peoples.map((people) => {
-        return (
-          <>
-            {people.email === user.email ? undefined : (
-              <div className="person d-flex align-items-center gap-2 justify-content-center shadow-lg rounded p-3 bg-body my-2 input-bg bg-body font-color">
-                <div
-                  className="imgwithactive"
-                  style={{
-                    height: "60px",
-                    width: "60px",
-                    borderRadius: "50%",
-                    backgroundImage: `url(${people.photoUrl})`,
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover",
-                    position: "relative",
-                  }}
-                ></div>
-                <div className="text-center">
-                  <h5>{people.name}</h5>
-                  <button
-                    className="btn btn-outline-warning"
-                    onClick={() => addFriend(people)}
-                  >
-                    Add Friend
-                  </button>
-                </div>
-              </div>
-            )}
-          </>
-        );
-      })}
+      {loader ? (
+        <div className="d-flex justify-content-center align-items-center">
+          <div className="spinner-border text-info" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      ) : (
+        <>
+          {peoples.map((people) => {
+            return (
+              <>
+                {people.email === user.email ? undefined : (
+                  <div className="person d-flex align-items-center gap-2 justify-content-center shadow-lg rounded p-3 bg-body my-2 input-bg bg-body font-color">
+                    <div
+                      className="imgwithactive"
+                      style={{
+                        height: "60px",
+                        width: "60px",
+                        borderRadius: "50%",
+                        backgroundImage: `url(${people.photoUrl})`,
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                        position: "relative",
+                      }}
+                    ></div>
+                    <div className="text-center">
+                      <h5>{people.name}</h5>
+                      <button
+                        className="btn btn-outline-warning"
+                        onClick={() => addFriend(people)}
+                      >
+                        Add Friend
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </>
+            );
+          })}
+        </>
+      )}
     </div>
   );
 };

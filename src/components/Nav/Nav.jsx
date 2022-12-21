@@ -1,7 +1,7 @@
 import {
-  faEnvelope,
-  faPeopleGroup,
-  faUser,
+    faEnvelope,
+    faPeopleGroup,
+    faUser
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
@@ -21,7 +21,7 @@ const Nav = () => {
   let inActiveClassNameM = "text-warning";
 
   useEffect(() => {
-    fetch(`http://localhost:5000/request/${user?.email}`)
+    fetch(`https://chitchat-zeta.vercel.app/request/${user?.email}`)
       .then((res) => res.json())
       .then((data) => setReq(data.length));
   }, [user, reFetch]);

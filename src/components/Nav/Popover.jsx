@@ -16,7 +16,7 @@ const Popovernav = () => {
   };
 
   // useEffect(() => {
-  //   fetch(`http://localhost:5000/user/${email}`)
+  //   fetch(`https://chitchat-zeta.vercel.app/user/${email}`)
   //     .then((res) => res.json())
   //     .then((data) => setName(data.name));
   // }, []);

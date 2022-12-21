@@ -30,7 +30,6 @@ const ProfileImg = () => {
             </div>
           ) : undefined}
         </div>
-        <p>Learner || Programmer</p>
       </div>
     </div>
   );

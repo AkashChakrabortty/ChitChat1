@@ -14,7 +14,7 @@ const Post = () => {
   const [modal, setModal] = useState({});
   const [comments, setComments] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/post/${user?.email}`)
+    fetch(`https://chitchat-zeta.vercel.app/post/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setPosts(data);
@@ -43,7 +43,7 @@ const Post = () => {
        previous_id: post._id,
        milliseconds: milliseconds,
      };
-       fetch(`http://localhost:5000/friendPostLike/`, {
+       fetch(`https://chitchat-zeta.vercel.app/friendPostLike/`, {
          method: "POST",
          headers: {
            "content-type": "application/json",
@@ -64,7 +64,7 @@ const Post = () => {
            // console.log(data);
          });
 
-    // fetch(`http://localhost:5000/like/${post._id}`, {
+    // fetch(`https://chitchat-zeta.vercel.app/like/${post._id}`, {
     //   method: "PATCH",
     //   headers: {
     //     "content-type": "application/json",
@@ -79,7 +79,7 @@ const Post = () => {
 
 const handleModal = (post) => {
   setModal(post);
-  fetch(`http://localhost:5000/comment/${post?._id}`)
+  fetch(`https://chitchat-zeta.vercel.app/comment/${post?._id}`)
     .then((res) => res.json())
     .then((data) => setComments(data));
 };

@@ -47,7 +47,7 @@ const Edit = () => {
         };
         console.log(editInfo);
 
-        fetch(`http://localhost:5000/edit/${user.email}`, {
+        fetch(`https://chitchat-zeta.vercel.app/edit/${user.email}`, {
           method: "POST",
           headers: {
             "content-type": "application/json",

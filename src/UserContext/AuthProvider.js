@@ -10,7 +10,7 @@ import {
 import React, { createContext, useEffect, useState } from "react";
 import io from "socket.io-client";
 import app from "../firebase/firebase.config";
-const socket = io.connect("http://localhost:5000/");
+const socket = io.connect("https://chitchat-zeta.vercel.app/");
 export const UserInfo = createContext();
 
 const AuthProvider = ({ children }) => {
@@ -74,12 +74,12 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // console.log(user);
+        console.log(user);
         setEmail(user.email);
         setUserId(user.uid);
         setUser(user);
       } else {
-        // console.log("else onAuthStateChanged");
+        console.log("else onAuthStateChanged");
         setUserId();
         setUser();
       }

@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 import './App.css';
 import router from "./Router/Router";
 function App() {
-  const socket = io.connect('http://localhost:5000/')
+  const socket = io.connect('https://chitchat-zeta.vercel.app/')
   // console.log(socket)
  
   return (

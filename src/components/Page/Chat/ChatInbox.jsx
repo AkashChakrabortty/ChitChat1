@@ -7,7 +7,7 @@ const ChatInbox = () => {
    const [friends, setFriends] = useState([]);
  
    useEffect(() => {
-     fetch(`http://localhost:5000/friend/${user?.email}`)
+     fetch(`https://chitchat-zeta.vercel.app/friend/${user?.email}`)
        .then((res) => res.json())
        .then((data) => setFriends(data));
    }, [user]);

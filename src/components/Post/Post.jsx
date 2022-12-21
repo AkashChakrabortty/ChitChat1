@@ -1,13 +1,12 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { UserInfo } from "../../UserContext/AuthProvider";
 const Post = () => {
-  const { userId, user } = useContext(UserInfo);
-  // console.log(user);
+  const { user } = useContext(UserInfo);
   const [uploaded, setUploaded] = useState(0);
-  const navigate = useNavigate();
   let photoUrl;
+  const notify = () => toast("Post uploaded Successfully.Go Profile route then visit post route to see your post!");
   const handleForm = (event) => {
     event.preventDefault();
 
@@ -30,8 +29,6 @@ const Post = () => {
         })
         .then((data) => {
           photoUrl = data.data.data.display_url;
-          // console.log(data);
-          // console.log(photoUrl);
         })
         .then(() => {
           const post = {
@@ -42,10 +39,9 @@ const Post = () => {
             user_photo: user.photoURL,
             milliseconds: milliseconds,
           };
-          // console.log(post);
 
           //insert db
-          fetch("http://localhost:5000/post", {
+          fetch("https://chitchat-zeta.vercel.app/post", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -55,7 +51,6 @@ const Post = () => {
             .then((res) => res.json())
             .then((data) => {
               event.target.reset();
-              navigate("/post");
             });
         })
         .catch((error) => console.log(error));
@@ -63,6 +58,9 @@ const Post = () => {
       alert("You can't post empty");
     }
   };
+  if(uploaded===100){
+    notify();
+  }
   return (
     <div>
       <div className="shadow-lg input-bg rounded p-3 bg-body border col-8 mx-auto text-center">
@@ -125,6 +123,15 @@ const Post = () => {
                   </>
                 ) : (
                   <div className="progress">
+                    <div className="modal-header p-2">
+                      <button
+                        type="button"
+                        className="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+
                     <div
                       className="progress-bar"
                       role="progressbar"

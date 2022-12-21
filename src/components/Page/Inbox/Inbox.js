@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import io from "socket.io-client";
 import { UserInfo } from "../../../UserContext/AuthProvider";
-const socket = io.connect("http://localhost:5000/");
+const socket = io.connect("https://chitchat-zeta.vercel.app/");
 const Inbox = () => {
     const location = useLocation();
     const id = location.pathname.split(":")[1];
@@ -15,7 +15,7 @@ const Inbox = () => {
     const [room, setRoom] = useState('');
     const [chat, setChat] = useState([]);
      useEffect(() => {
-       fetch(`http://localhost:5000/single_friend/${id}`)
+       fetch(`https://chitchat-zeta.vercel.app/single_friend/${id}`)
          .then((res) => res.json())
          .then((data) => {
            if (user.email === data.friend_email) {
@@ -61,7 +61,7 @@ const Inbox = () => {
        //  socket.emit("chat", chatInfo);
 
        //insert db
-       fetch("http://localhost:5000/chatstore", {
+       fetch("https://chitchat-zeta.vercel.app/chatstore", {
          method: "POST",
          headers: {
            "content-type": "application/json",
@@ -76,7 +76,7 @@ const Inbox = () => {
      }
 //  console.log(room);
        useEffect(() => {
-         fetch(`http://localhost:5000/getChat/${room}`)
+         fetch(`https://chitchat-zeta.vercel.app/getChat/${room}`)
            .then((res) => res.json())
            .then((data) => {
             //  console.log(data);
@@ -154,7 +154,7 @@ const Inbox = () => {
           }
           <hr className="text-warning col-11 mx-auto" />
           <div className="sent d-flex justify-content-end">
-            <div class="form-floating col-6 text-end">
+            <div className="form-floating col-6 text-end">
               <form onSubmit={handleSubmit}>
                 <textarea
                   className="form-control input-bg bg-body font-color"

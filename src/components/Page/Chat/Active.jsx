@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useState } from "react";
 import io from "socket.io-client";
 import { UserInfo } from "../../../UserContext/AuthProvider";
-const socket = io.connect("http://localhost:5000/");
+const socket = io.connect("https://chitchat-zeta.vercel.app/");
 const Active = () => {
   // const {socket} = useState(UserInfo)
   // console.log(socket)

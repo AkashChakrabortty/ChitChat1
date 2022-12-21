@@ -10,7 +10,7 @@ const FriendRequest = () => {
   const notify = (value) => toast(value);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/request/${user.email}`)
+    fetch(`https://chitchat-zeta.vercel.app/request/${user.email}`)
       .then((res) => res.json())
       .then((data) => setData(data));
   }, [user,reFetch]);
@@ -24,7 +24,7 @@ const FriendRequest = () => {
       friend_email: req.sender_email,
       friend_photo:req.sender_photo
     }
-    fetch(`http://localhost:5000/reqAccepted/${req._id}`,{
+    fetch(`https://chitchat-zeta.vercel.app/reqAccepted/${req._id}`,{
         method: 'POST',
         headers: {
             'content-type': "application/json"
@@ -40,7 +40,7 @@ const FriendRequest = () => {
   }
   const reqDeleted = (req) => {
    
-    fetch(`http://localhost:5000/reqDelete/${req._id}`,{
+    fetch(`https://chitchat-zeta.vercel.app/reqDelete/${req._id}`,{
         method: 'DELETE',
         headers: {
             'content-type': "application/json"

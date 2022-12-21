@@ -29,7 +29,7 @@ const CommentModal = ({ post, comments }) => {
         comment: text,
       };
       //insert db
-      fetch("http://localhost:5000/comment", {
+      fetch("https://chitchat-zeta.vercel.app/comment", {
         method: "POST",
         headers: {
           "content-type": "application/json",

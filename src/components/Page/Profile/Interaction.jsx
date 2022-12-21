@@ -21,7 +21,7 @@ const Interaction = () => {
   const [totalCommentsArray, setTotalCommentsArray] = useState([]);
   useEffect(() => {
     fetch(
-      `http://localhost:5000/likes/${user?.email}?startIndex=${startIndexLikes}`
+      `https://chitchat-zeta.vercel.app/likes/${user?.email}?startIndex=${startIndexLikes}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -34,7 +34,7 @@ const Interaction = () => {
 
  useEffect(() => {
    fetch(
-     `http://localhost:5000/comments/${user?.email}?startIndex=${startIndexComments}`
+     `https://chitchat-zeta.vercel.app/comments/${user?.email}?startIndex=${startIndexComments}`
    )
      .then((res) => res.json())
      .then((data) => {

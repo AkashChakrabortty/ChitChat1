@@ -5,7 +5,7 @@ const ProfileInfo = () => {
   const { user } = useContext(UserInfo);
   const [data, setData] = useState();
   useEffect(() => {
-    fetch(`http://localhost:5000/profileInfo/${user?.email}`)
+    fetch(`https://chitchat-zeta.vercel.app/profileInfo/${user?.email}`)
       .then((res) => res.json())
       .then((data) => setData(data));
   }, [user]);

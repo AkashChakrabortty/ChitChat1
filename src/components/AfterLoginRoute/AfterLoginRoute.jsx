@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import io from "socket.io-client";
 import { UserInfo } from "../../UserContext/AuthProvider";
 import Nav from "../Nav/Nav";
-const socket = io.connect("http://localhost:5000/");
+const socket = io.connect("https://chitchat-zeta.vercel.app/");
 const AfterLoginRoute = () => {
   const { user } = useContext(UserInfo);
   const activeUserInfo = {

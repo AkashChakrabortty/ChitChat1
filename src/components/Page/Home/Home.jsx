@@ -11,52 +11,29 @@ const Home = () => {
   const {
     user,
     reFetch,
-    loader,
-    setLoader,
     setReFetch,
     startIndexHomePost,
   } = useContext(UserInfo);
   const [posts, setPosts] = useState();
   const [totalPosts, setTotalPosts] = useState();
-  // let [startIndex, setStartIndex] = useState(0);
-  // const [loader, setLoader] = useState(true);
-  // const [reFetch, setReFetch] = useState(false);
+  const [loader, setLoader] = useState(true);
+
   const [ modal , setModal] = useState({});
   const [comments, setComments] = useState([]);
   const [totalLikes,setTotalLikes] = useState([]);
  
   useEffect(() => {
     fetch(
-      `http://localhost:5000/friendsPost/${user?.email}?startIndex=${startIndexHomePost}`
+      `https://chitchat-zeta.vercel.app/friendsPost/${user?.email}?startIndex=${startIndexHomePost}`
     )
       .then((res) => res.json())
       .then((data) => {
         setPosts(data.filterLimitArray);
         setTotalPosts(data.total);
-        setLoader(false);
-        // console.log(data);
+         setLoader(false);
       });
   }, [user, reFetch]);
-  // const loadFirst = () => {
-  //   setLoader(true);
-  //   setStartIndex(0);
-  //   setReFetch(!reFetch);
-  // };
-  // const loadPrevious = () => {
-  //   setLoader(true);
-  //   setStartIndex(startIndex - 2);
-  //   setReFetch(!reFetch);
-  // };
-  // const loadNext = () => {
-  //   setLoader(true);
-  //   setStartIndex(startIndex + 2);
-  //   setReFetch(!reFetch);
-  // };
-  // const loadLast = () => {
-  //   setLoader(true);
-  //   setStartIndex(total - 2);
-  //   setReFetch(!reFetch);
-  // };
+  
 
   const handleLike = (post) => {
 
@@ -74,7 +51,7 @@ const Home = () => {
       milliseconds: milliseconds,
     };
   
-    fetch(`http://localhost:5000/friendPostLike/`, {
+    fetch(`https://chitchat-zeta.vercel.app/friendPostLike/`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -84,22 +61,20 @@ const Home = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged === false) {
-          // notify("Like allready Done!");
-          // setLike(false);
+      
           setReFetch(!reFetch);
         } else {
-          // notify("Like Done!");
-          // setLike(true);
+         
           setReFetch(!reFetch);
         }
-        // console.log(data);
+        
       });
   };
   
  
   const handleModal = (post) => {
      setModal(post);
-        fetch(`http://localhost:5000/comment/${post?._id}`)
+        fetch(`https://chitchat-zeta.vercel.app/comment/${post?._id}`)
           .then((res) => res.json())
           .then((data) => setComments(data));
   }
@@ -108,11 +83,10 @@ const Home = () => {
     setTotalLikes(likeInfo);
   };
 
-
   return (
     <div className="container font-color">
       <Post></Post>
-      {posts ? (
+      {posts?.length > 0 ? (
         <>
           {loader ? (
             <div
@@ -186,50 +160,6 @@ const Home = () => {
                 total={totalPosts}
                 whichPagenation="home"
               ></Pagenation>
-              {/* <nav aria-label="Page navigation example border">
-                <div className="pagination justify-content-center my-3 ">
-                  <li className="page-item mx-2">
-                    {startIndex === 0 ? undefined : (
-                      <button
-                        className="btn btn-warning page-link input-bg font-color"
-                        onClick={loadFirst}
-                      >
-                        First
-                      </button>
-                    )}
-                  </li>
-                  <li className="page-item">
-                    {startIndex === 0 ? undefined : (
-                      <button
-                        className="btn btn-warning page-link input-bg font-color"
-                        onClick={loadPrevious}
-                      >
-                        Previous
-                      </button>
-                    )}
-                  </li>
-                  <li className="page-item mx-2">
-                    {startIndex === total - 2 ? undefined : (
-                      <button
-                        className="btn btn-warning page-link input-bg font-color"
-                        onClick={loadNext}
-                      >
-                        Next
-                      </button>
-                    )}
-                  </li>
-                  <li className="page-item">
-                    {startIndex === total - 2 ? undefined : (
-                      <button
-                        className="btn btn-warning page-link input-bg font-color"
-                        onClick={loadLast}
-                      >
-                        Last
-                      </button>
-                    )}
-                  </li>
-                </div>
-              </nav> */}
             </>
           )}
         </>

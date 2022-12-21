@@ -44,7 +44,7 @@ const Story = () => {
           // console.log(post);
 
           //insert db
-          fetch("http://localhost:5000/story", {
+          fetch("https://chitchat-zeta.vercel.app/story", {
             method: "POST",
             headers: {
               "content-type": "application/json",
