@@ -2,13 +2,10 @@ import { faPhone, faVideo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import io from "socket.io-client";
 import { UserInfo } from "../../../UserContext/AuthProvider";
-const socket = io.connect("https://chitchat-zeta.vercel.app/");
 const Inbox = () => {
     const location = useLocation();
     const id = location.pathname.split(":")[1];
-    // console.log(id)
     const [friendInfo,setFriendInfo] = useState([]);
     const {user} = useContext(UserInfo)
     const [reFetch,setRefetch]= useState(true)
@@ -34,7 +31,6 @@ const Inbox = () => {
              data.user_photo = data.friend_photo;
              data.friend_photo = photoSwap;
            }
-           // console.log(data)
            setFriendInfo(data);
            setRoom(data._id);
          });
@@ -56,10 +52,6 @@ const Inbox = () => {
          receiver_email: friendInfo.friend_email,
          room: friendInfo._id,
        };
-       //  console.log(text)
-       //  let socket = io();
-       //  socket.emit("chat", chatInfo);
-
        //insert db
        fetch("https://chitchat-zeta.vercel.app/chatstore", {
          method: "POST",
@@ -74,23 +66,13 @@ const Inbox = () => {
            setRefetch(!reFetch)
          });
      }
-//  console.log(room);
        useEffect(() => {
          fetch(`https://chitchat-zeta.vercel.app/getChat/${room}`)
            .then((res) => res.json())
            .then((data) => {
-            //  console.log(data);
-             //  setFriendInfo(data);
-             //  setRoom(data._id);
              setChat(data);
            });
        }, [reFetch, user]);
-//    console.log(room);
-    //  socket.on(`akash`, (info) => {
-    //    console.log(info.text);
-    //  });
-   
-      // console.log(friendInfo);
       const handleRefresh = () => {
          console.log('refresh');
       setRefetch(!reFetch);

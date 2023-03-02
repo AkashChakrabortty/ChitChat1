@@ -31,11 +31,11 @@ const Login = () => {
   return (
     <div
       id="login-container"
-      className="col-12 position-absolute font-color default-bg"
+      className="col-12 position-absolute " style={{height: '100vh'}}
     >
       <div
         id="login-section"
-        className="col-6 col-md-4 position-relative top-50 start-50 border p-2 rounded"
+        className="col-6 col-md-4 position-relative top-50 start-50 border p-2 rounded shadow-lg p-3 mb-5 bg-body-tertiary rounded"
       >
         {loader ? (
           <div className="d-flex justify-content-center align-items-center">
@@ -70,9 +70,7 @@ const Login = () => {
           </Form.Group>
           <div className="d-sm-flex justify-content-between">
             <div className="text-center">
-              <Button variant="outline-warning" type="submit">
-                Submit
-              </Button>
+              <button className="btn btn-primary" type="submit">Submit</button>
             </div>
             <div className="text-center d-flex align-items-center justify-content-center">
               <Link onClick={handleReset} className="font-color">
@@ -83,7 +81,7 @@ const Login = () => {
         </Form>
         <div className="mt-2 text-center">
           <Link to="create">
-            <Button variant="outline-warning">Create New Account</Button>
+            <button className="btn btn-primary">Create New Account</button>
           </Link>
         </div>
           </>

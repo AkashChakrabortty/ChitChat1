@@ -1,25 +1,15 @@
 import { useContext } from "react";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
-import { NavLink } from "react-router-dom";
 import { UserInfo } from "../../UserContext/AuthProvider";
 
 const Popovernav = () => {
   const { logout, user } = useContext(UserInfo);
-  // console.log(user);
-  // const [name, setName] = useState();
-  let activeClassName = "font-color fs-6";
-  let inActiveClassName = "font-color text-decoration-none fs-6";
 
   const handleLogout = () => {
     logout();
   };
 
-  // useEffect(() => {
-  //   fetch(`https://chitchat-zeta.vercel.app/user/${email}`)
-  //     .then((res) => res.json())
-  //     .then((data) => setName(data.name));
-  // }, []);
   return (
     <div>
       {["bottom"].map((placement) => (
@@ -36,16 +26,7 @@ const Popovernav = () => {
                 {user?.displayName}
               </Popover.Header>
               <Popover.Body>
-                <NavLink
-                  to="/notification"
-                  className={({ isActive }) =>
-                    isActive ? activeClassName : inActiveClassName
-                  }
-                >
-                  Notification(2)
-                </NavLink>
-                <hr />
-                <button className="btn btn-warning" onClick={handleLogout}>
+                <button className="btn btn-primary" onClick={handleLogout}>
                   Log out
                 </button>
               </Popover.Body>

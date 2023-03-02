@@ -99,15 +99,6 @@ const Nav = () => {
               <FontAwesomeIcon icon={faEnvelope} />
             </NavLink>
 
-            {/* <NavLink
-            to="/notification"
-            className={({ isActive }) =>
-              isActive ? activeClassNameM : inActiveClassNameM
-            }
-          >
-            <FontAwesomeIcon icon={faBell} />
-          </NavLink> */}
-
             <NavLink
               to="/people"
               className={({ isActive }) =>
@@ -116,25 +107,8 @@ const Nav = () => {
             >
               <FontAwesomeIcon icon={faPeopleGroup} />
             </NavLink>
-
-            {/* <Popover></Popover> */}
           </div>
-
           <Popover></Popover>
-        </div>
-
-        <div className="right col-md-4 col-6 my-2 mx-auto align-items-center">
-          <form className="d-flex" role="search">
-            <input
-              className="form-control me-2 input-bg"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button className="btn btn-outline-warning" type="submit">
-              Search
-            </button>
-          </form>
         </div>
       </nav>
     </div>

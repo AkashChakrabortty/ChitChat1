@@ -59,11 +59,11 @@ const CreateAccount = () => {
   };
 
   return (
-    <div className="default-bg  font-color">
+    <div className="default-bg ">
       <div id="create-container" className="col-12 position-absolute">
         <div
           id="create-section"
-          className="col-6 col-md-4 position-relative top-50 start-50 border p-2 rounded"
+          className="col-6 col-md-4 position-relative top-50 start-50 border p-2 rounded shadow-lg p-3 mb-5 bg-body-tertiary"
         >
           {loader ? (
             <div className="d-flex justify-content-center align-items-center">
@@ -137,13 +137,9 @@ const CreateAccount = () => {
                     {/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
                       password
                     ) ? (
-                      <Button variant="outline-warning" type="submit">
-                        Submit
-                      </Button>
+                      <button className="btn btn-primary" type="submit">Submit</button>
                     ) : (
-                      <Button variant="outline-warning" type="submit" disabled>
-                        Submit
-                      </Button>
+                      <button className="btn btn-primary" type="submit" disabled>Submit</button>
                     )}
                   </div>
                 </div>

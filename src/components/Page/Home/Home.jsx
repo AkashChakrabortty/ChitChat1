@@ -111,11 +111,11 @@ const Home = () => {
                       <p>{post?.user_name}</p>
                       <p>{new Date(post?.milliseconds).toUTCString()}</p>
                       <p className="fs-4">{post?.post}</p>
-                      <div>
+                      <div className="text-center">
                         <img
                           src={post?.post_photo}
                           alt={post?.post}
-                          className="img-fluid"
+                          className="img-fluid" style={{height: '50vh'}}
                         />
                       </div>
                       <div className="d-flex justify-content-evenly mt-2">

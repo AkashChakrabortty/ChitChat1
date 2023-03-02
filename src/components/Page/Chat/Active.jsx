@@ -1,29 +1,11 @@
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useState } from "react";
-import io from "socket.io-client";
+
 import { UserInfo } from "../../../UserContext/AuthProvider";
-const socket = io.connect("https://chitchat-zeta.vercel.app/");
 const Active = () => {
-  // const {socket} = useState(UserInfo)
-  // console.log(socket)
   const { user } = useContext(UserInfo);
   const [activeFriends, setactiveFriends] = useState([]);
-  // const handlesubmit = () => {
-  //   socket.emit('reactEvent',test)
-  // }
- 
-  // socket.on("message", (message) => {
-  //   console.log(message);
-  // });
-
-//  useEffect(() => {
-//    socket.emit("activeFriends", user.email);
-//    socket.on("message", (message) => {
-//      setactiveFriends(message);
-     
-//    });
-//  }, [user, socket, activeFriends]);
   
   return (
     <div className="col-6 mx-auto mt-4">
