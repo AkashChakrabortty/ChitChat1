@@ -121,14 +121,14 @@ const Home = () => {
                       <div className="d-flex justify-content-evenly mt-2">
                         <div className="like d-flex gap-2">
                           <button
-                            className="btn btn-outline-warning"
+                            className="btn btn-outline-primary"
                             data-bs-toggle="modal"
                             data-bs-target="#likeModal"
                             onClick={() => handleLikeModal(post.totalLikes)}
                           >
                             {post.totalLikes.length}
                           </button>
-                          <button className="btn btn-outline-warning">
+                          <button className="btn btn-outline-primary">
                             <FontAwesomeIcon
                               icon={faThumbsUp}
                               className={`fs-2 ${
@@ -140,7 +140,7 @@ const Home = () => {
                         </div>
                         <div className="comments">
                           <button
-                            className="btn btn-outline-warning"
+                            className="btn btn-outline-primary"
                             data-bs-toggle="modal"
                             data-bs-target="#commentModal"
                             onClick={() => handleModal(post)}

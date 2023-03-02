@@ -97,14 +97,12 @@ const router = createBrowserRouter([
         ),
       },
     ],
-  },
-  {
+  }, {
     path: "/",
     element: (
       <>
         <PrivateRoute>
           {" "}
-          <ChatNav></ChatNav>
           <Outlet></Outlet>
         </PrivateRoute>
       </>
@@ -115,22 +113,6 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ChatInbox></ChatInbox>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/active",
-        element: (
-          <PrivateRoute>
-            <Active></Active>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/story",
-        element: (
-          <PrivateRoute>
-            <Story></Story>
           </PrivateRoute>
         ),
       },

@@ -80,7 +80,7 @@ const Inbox = () => {
     return (
       <div className="d-flex  align-items-center" style={{ height: "100vh" }}>
         <div
-          className="col-8 border border-warning mx-auto rounded"
+          className="col-8 shadow-lg p-3 mb-5 mx-auto rounded"
           style={{ overflowY: "auto", height: "90vh" }}
         >
           <div className="header d-flex justify-content-between align-items-center p-2 font-color">
@@ -96,20 +96,19 @@ const Inbox = () => {
             </div>
             <div className="icon d-flex gap-2">
               <span
-                className="border border-warning border-2 p-1"
                 style={{ borderRadius: "50%" }}
               >
                 <FontAwesomeIcon icon={faPhone} />
               </span>
               <span
-                className="border border-warning border-2 p-1"
+                className=""
                 style={{ borderRadius: "50%" }}
               >
                 <FontAwesomeIcon icon={faVideo} />
               </span>
             </div>
           </div>
-          <hr className="text-warning col-11 mx-auto" />
+          <hr className="col-11 mx-auto" />
           {
             <div className="chat-container">
               {chat?.map((e) => {
@@ -134,7 +133,7 @@ const Inbox = () => {
               })}
             </div>
           }
-          <hr className="text-warning col-11 mx-auto" />
+          <hr className=" col-11 mx-auto" />
           <div className="sent d-flex justify-content-end">
             <div className="form-floating col-6 text-end">
               <form onSubmit={handleSubmit}>
@@ -146,12 +145,12 @@ const Inbox = () => {
                   name="text"
                 ></textarea>
                 <span
-                  className="btn btn-outline-warning mt-2 me-2"
+                  className="btn btn-outline-primary mt-2 me-2"
                   onClick={handleRefresh}
                 >
                   Refresh
                 </span>
-                <button className="btn btn-outline-warning mt-2" type="submit">
+                <button className="btn btn-outline-primary mt-2" type="submit">
                   Sent
                 </button>
               </form>

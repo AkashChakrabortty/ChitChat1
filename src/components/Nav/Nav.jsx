@@ -17,8 +17,8 @@ const Nav = () => {
   let activeClassName = "font-color";
   let inActiveClassName = "font-color text-decoration-none ";
 
-  let activeClassNameM = "text-warning nav-m";
-  let inActiveClassNameM = "text-warning";
+  let activeClassNameM = "text-primary nav-m";
+  let inActiveClassNameM = "text-primary";
 
   useEffect(() => {
     fetch(`https://chitchat-zeta.vercel.app/request/${user?.email}`)
@@ -27,11 +27,11 @@ const Nav = () => {
   }, [user, reFetch]);
 
   return (
-    <div className="container">
-      <nav className="">
+    <div className="container my-2">
+      <nav className="bg-light col-10 mx-auto">
         <div className="d-flex justify-content-between">
-          <div className="left d-none d-sm-block fs-3 col-11">
-            <div className="d-flex justify-content-evenly">
+          <div className="left d-none d-sm-block fs-3 col-10">
+            <div className="d-flex justify-content-between">
               <NavLink
                 to="/home"
                 className={({ isActive }) =>
@@ -51,12 +51,12 @@ const Nav = () => {
               </NavLink>
 
               <NavLink
-                to="/chatHome"
+                to="/inbox"
                 className={({ isActive }) =>
                   isActive ? activeClassName : inActiveClassName
                 }
               >
-                Chat
+                Inbox
               </NavLink>
 
               <NavLink
